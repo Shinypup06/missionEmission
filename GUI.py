@@ -107,8 +107,24 @@ def executeSituation(num):
         outcomestats = Situations.outcome2s[randnum][1:3]
     situationFrame.lower()
 
+def checkWinLoss():
+    if money < 0:
+        reason["text"] = "You went bankrupt and your department has been disbanded."
+        loseFrame.lift()
+    elif carbon > 549:
+        reason["text"] = "You went above the carbon emissions limit and you have been fired for failing to prevent carbon emission rates from skyrocketing."
+        loseFrame.lift()
+    elif happiness < 0.2:
+        reason["text"] = "You were too unpopular and you have been fired due to popular discontent. Better luck next time!"
+        loseFrame.lift()
+    elif year == 2050 and carbon > 270:
+        reason["text"] = "You were unable to reach the 2050 carbon emission target, despite your impressive money and approval management skills."
+        loseFrame.lift()
+    elif year == 2050 and carbon <=270:
+        successMsg["text"] = "Congrats, You were able to reach the 2050 carbon emission target!"
+        winFrame.lift()
 
-#TODO: write this
+
 def endturn():
     global year
     global money
@@ -119,9 +135,12 @@ def endturn():
     global deltaMoney
     global deltaHappiness
 
+    checkWinLoss()
+
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + outcomestats[1]
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + outcomestats[0]
     deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + outcomestats[2] - 0.001, 3)
+
 
     year += 1
     money += deltaMoney
@@ -161,6 +180,20 @@ reason.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
 loseButton = tk.Button(loseFrame, text= "OK", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
 loseButton.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
+
+#Win case
+winFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+winFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
+
+winTitle = tk.Label(winFrame, font = ("Cambria", 16, "bold"), text= "You won!", bg="white")
+winTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
+
+successMsg = tk.Label(winFrame, font= ("Cambria", 12), bg="white", text="temp")
+successMsg.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
+
+winButton = tk.Button(winFrame, text= "OK", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+winButton.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
+
 
 #The frame with the situation in it that pops up and disappears when you resolve it
 situationFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
