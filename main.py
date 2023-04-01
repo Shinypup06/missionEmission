@@ -3,20 +3,36 @@ import variables
 name = input(
 
     """
-    Welcome to CarbonGame!
+    Welcome to Mission: Emission!
     Please enter your name below:
     """
 )
-variable = variables.variableClass(name, 100, 412000, 50)
+
+money = 100
+carbon = 412
+happiness = 0.5
 
 year = 2023
 months = 1
 
+treeNumber = 6
+utilityUsage = 5
+factoryNumber = 4
+
+
+
 while True:
+    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
+    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
+    deltaHappiness = utilityUsage*0.05 + treeNumber*0.01 - factoryNumber*0.02 - 0.01
     option = input(
         f"""
-        {str(variable)}
-        Welcome to Home. The year is Year {year}, Month {months*6+1}. Please choose one of the following:
+        Money: ${money}\tCO2 Levels: {carbon} ppm\tApproval Rating: {happiness*10}%
+        Welcome to Home. The year is Year {year}, Month {months*6+1}. 
+        Projected change in CO2: {deltaCO2}
+        Projected change in money: {deltaMoney}
+        Projected change in approval: {deltaHappiness}
+        Please choose one of the following:
         0 - Next Turn
         1 - View Bills
         2 - View Policies
@@ -43,11 +59,36 @@ while True:
         if yn == "Yes" or yn == "Y" or yn == "YES" or yn == "yes":
             break
     elif int(option) == 0:
-        if months == 1:
-            months = 0
-            print(months)
-            year += 1
-        elif months == 0:
-            months += 1
+        yn = input("""
+        Are you sure you want to go on to the next turn? (Y/N):
+        """) 
+        
+        if yn == "Yes" or yn == "Y" or yn == "YES" or yn == "yes":
+            if months == 1:
+                months = 0
+                print(months)
+                year += 1
+            elif months == 0:
+                months += 1
+
+            money += deltaMoney
+            carbon += deltaCO2
+            happiness += deltaHappiness
+    elif int(option) == 2:
+        while True:
+            choice = input(f"""
+            Trees Planted per turn: {treeNumber}
+            Utility Usage per turn: {utilityUsage}
+            Factories in Operation: {factoryNumber}
+
+            What would you like to do?
+            1 - increase Trees Planted
+            2 - increase Utility usage
+            3 - increase Factories
+            4 - return to Menu
+            """)
+
+
+
     else:
         input("error, please try again")
