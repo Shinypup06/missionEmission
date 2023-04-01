@@ -98,8 +98,7 @@ def generateSituation():
             break
     situationText["text"] = Situations.descriptions[randnum] + Situations.outcome1s[randnum][0] + Situations.outcome2s[randnum][0]
     situationFrame.lift()
-    
-    
+        
 def executeSituation(num):
     global outcomestats
     if(num == 1):
@@ -149,6 +148,19 @@ smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((175, 175), Image
 #this is just here to reserve the space on the gui
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
+
+#Lose case
+loseFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+loseFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
+
+loseTitle = tk.Label(loseFrame, font = ("Cambria", 16, "bold"), text= "You Lost!", bg="white")
+loseTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
+
+reason = tk.Label(loseFrame, font= ("Cambria", 12), bg="white", text="temp")
+reason.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
+
+loseButton = tk.Button(loseFrame, text= "OK", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+loseButton.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
 
 #The frame with the situation in it that pops up and disappears when you resolve it
 situationFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
