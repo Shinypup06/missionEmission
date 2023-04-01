@@ -1,5 +1,12 @@
 import variables
 import Situations
+import random
+
+global money
+global carbon
+global happiness
+global year
+global months
 
 name = input(
 
@@ -11,10 +18,14 @@ name = input(
 
 money = 100
 carbon = 412
-happiness = 0.5
+happiness = 0.6
 
 year = 2023
 months = 1
+
+global treeNumber
+global utilityUsage
+global factoryNumber
 
 treeNumber = 6
 utilityUsage = 5
@@ -26,7 +37,51 @@ global deltaCO2
 global deltaMoney
 global deltaHappiness
 
+firstYearPassed = False
+
+usedSituations = []
+
+def endTurn():
+    firstYearPassed = True
+    if months == 1:
+        months = 0
+        print(months)
+        year += 1
+    elif months == 0:
+        months += 1
+
+    money += deltaMoney
+    carbon += deltaCO2
+    happiness += deltaHappiness
+
+def addTrees():
+    treeNumber += 1
+
+def subtractTrees():
+    treeNumber -= 1
+
+def addUtility():
+    utilityUsage += 1
+
+def subtractUtility():
+    utilityUsage -= 1
+
 while True:
+    if firstYearPassed:
+        print("Congrats on your first year. From now on, special Situations may pop up that may impact CO2, finances, and approval.")
+        if random.randint(0, 1) == 1:
+            situationNumber = random.randint(0, 26)
+            while True:
+                if (usedSituations.count(situationNumber) > 0):
+                    situationNumber = random.randint(0, 26)
+                else:
+                    break
+            Situations.createSituation(situationNumber)
+
+                    
+
+
+
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
     deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
@@ -63,24 +118,7 @@ while True:
         """) 
         if yn == "Yes" or yn == "Y" or yn == "YES" or yn == "yes":
             break
-    elif int(option) == 0:
-        yn = input("""
-        Are you sure you want to go on to the next turn? (Y/N):
-        """) 
-        
-        if yn == "Yes" or yn == "Y" or yn == "YES" or yn == "yes":
-            if months == 1:
-                months = 0
-                print(months)
-                year += 1
-            elif months == 0:
-                months += 1
-
-            money += deltaMoney
-            carbon += deltaCO2
-            happiness += deltaHappiness
     elif int(option) == 2:
-        
         while True:
             deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
             deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
@@ -97,7 +135,7 @@ while True:
 
             What would you like to do? 
             1 - change Trees Planted (decreases CO2 and increases approval but costs money)
-            2 - change Utility usage (increases CO2 and increases money from tax revenue, but decreasing utility usage will cause citizens' approval to go way down however)
+            2 - change Utility usage (increases CO2 and increases money from tax revenue, but decreasing utility usage will cause citizens' approval to go way down)
             3 - change Factories (decreases citizens' approval and increases CO2 and makes a high amount of tax revenue)
             4 - return to Menu
             """)
@@ -105,15 +143,12 @@ while True:
             if int(choice) == 1:
                 treeNumber += 1
                 print("Number of trees planted per turn increased.")
-                increased = True
             elif int(choice) == 2:
-                treeNumber += 1
-                print("Number of trees planted per turn increased.")
-                increased = True
+                utilityUsage += 1
+                print("Utility usage increased.")
             elif int(choice) == 3:
-                treeNumber += 1
-                print("Number of trees planted per turn increased.")
-                increased = True
+                factoryNumber += 1
+                print("Number of factories in operation increased.")
             elif int(choice) == 4:
                 break
     else:
