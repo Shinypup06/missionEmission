@@ -4,7 +4,7 @@ from PIL import ImageTk, Image
 HEIGHT = 700
 WIDTH = 1200
 
-
+name = " "
 money = 100
 carbon = 412
 happiness = 0.6
@@ -56,17 +56,25 @@ def subtractFactory():
 def closeTutorial():
     tutorialFrame.lower()
 
-def selectMChar():
+def selectMChar(entry):
+    global name
     character["image"] = mchar
+    name = entry
+    nameDisplay["text"] = "Welcome, " + name + "!"
+    situationTitle["text"] = "Important Message for Mayor " + name + "!"
     charSelectFrame.lower()
 
-def selectFChar():
+def selectFChar(entry):
+    global name
     character["image"] = fchar
+    name = entry
+    nameDisplay["text"] = "Welcome, " + name + "!"
+    situationTitle["text"] = "Important Message for Mayor " + name + "!"
     charSelectFrame.lower()
 
 #TODO: write this
 def endturn():
-    print("temp")
+    situationFrame.lift()
 
 root = tk.Tk()
 
@@ -82,18 +90,38 @@ smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((175, 175), Image
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
+#The frame with the situation in it that pops up and disappears when you resolve it
+situationFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+situationFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
+
+situationTitle = tk.Label(situationFrame, font = ("Cambria", 16, "bold"), text= "Important Message!", bg="white")
+situationTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
+
+#TODO: SITUATION TEXT
+situationText = tk.Label(situationFrame, font= ("Cambria", 12), bg="white", text="temp")
+situationText.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
+
+situation1 = tk.Button(situationFrame, text= "1", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+situation2 = tk.Button(situationFrame, text= "2", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+
+situation1.place(relwidth=0.3, relheight=0.1, relx = 0.15, rely = 0.7)
+situation2.place(relwidth=0.3, relheight=0.1, relx = 0.55, rely = 0.7)
+
+
+
 
 
 mainFrame = tk.Frame(root, bg="white")
 mainFrame.place(relheight = 1, relwidth=1, relx=0, rely=0)
 
 
+#the frame with the character in it
 charFrame = tk.Frame(mainFrame, bg="white")
 charFrame.place(relx=0.3, rely=0, relheight=0.55, relwidth=0.7)
 character = tk.Label(charFrame, image=nochar, bg="white")
 character.place(relx = 0.2, rely=0.15, relwidth=0.6, relheight=0.8)
-nameDisplay = tk.Label(charFrame, text= " ", font=("Cambria", 15), bg="white")
-nameDisplay.place(relx = 0.2, rely=0.05, relheight=0.1, relwidth=0.8 ) 
+nameDisplay = tk.Label(charFrame, text= " ", font=("Cambria", 16, "bold"), bg="white")
+nameDisplay.place(relx = 0.09, rely=0.1, relheight=0.1, relwidth=0.8 ) 
 
 endTurnButton = tk.Button(charFrame, text= "End Turn", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=endturn)
 endTurnButton.place(relx=0.7, rely=0.4, relheight=0.2, relwidth=0.2)
@@ -183,8 +211,6 @@ utilitiesLabel.place(relwidth=0.36, relheight=0.05, relx = 0.27, rely = 0.9)
 utilitiesnum = tk.Label(actionBar, text="5", font=("Cambria", 12),  bg="#d6cfb7", justify="left")
 utilitiesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.9)
 
-situationFrame = tk.Frame(actionBar, bg="#f3efe1")
-situationFrame.place(relwidth= 0.9, relheight= 0.5, relx = 0.05, rely = 0.15)
 
 
 #tutorial stuff
@@ -208,17 +234,19 @@ charSelectFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 charSelectTitle = tk.Label(charSelectFrame, font = ("Cambria", 16, "bold"), text= "Select Character", bg="white")
 charSelectTitle.place(relx = 0.1, rely=0.1, relheight=0.1, relwidth=0.8)
 
-mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=selectMChar, bg="white")
-mCharButton.place(relx=0.15, rely= 0.4, relheight= 0.5, relwidth= 0.3)
-
-fCharButton = tk.Button(charSelectFrame, image=smallfchar, command=selectFChar, bg="white")
-fCharButton.place(relx=0.55, rely= 0.4, relheight= 0.5, relwidth= 0.3)
-
 nameQ = tk.Label(charSelectFrame, text="Name: ", font = ("Cambria", 16, "bold"), bg="white")
 nameQ.place(relx=0.1, rely=0.25, relheight=0.1, relwidth=0.2)
 
 nameEntry = tk.Entry(charSelectFrame, font= ("Cambria",16))
 nameEntry.place(relx = 0.3, rely=0.25, relheight=0.1, relwidth=0.5)
+
+mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=lambda: selectMChar(nameEntry.get()), bg="white")
+mCharButton.place(relx=0.15, rely= 0.4, relheight= 0.5, relwidth= 0.3)
+
+fCharButton = tk.Button(charSelectFrame, image=smallfchar, command=lambda: selectFChar(nameEntry.get()), bg="white")
+fCharButton.place(relx=0.55, rely= 0.4, relheight= 0.5, relwidth= 0.3)
+
+
 
 root.title("Mission: Emission")
 root.mainloop()
