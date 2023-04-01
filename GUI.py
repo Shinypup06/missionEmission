@@ -24,13 +24,14 @@ def updateResourceLabels():
         moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594)
     else:
         moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594 * (money/100) * 0.5)
-    moneyValue["text"] = f"{money}"
+    moneyValue["text"] = f"{round(money, 1)}"
 
     if ((carbon/412) * 0.75 > 549):
         carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594)
     else:
         carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * (carbon/412) * 0.75)
-    carbonValue["text"] = f"{carbon}"
+    carbonValue["text"] = f"{round(carbon,1)}"
+    currentCO2["text"] = f"{round(carbon,1)} ppm"
 
 def addTrees():
     global treeNumber
@@ -146,9 +147,9 @@ def endturn():
 
     
 
-    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + outcomestats[1]
-    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + outcomestats[0]
-    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + outcomestats[2] - 0.001, 3)
+    deltaCO2 = round(utilityUsage*3 + factoryNumber*6 - treeNumber*6 + outcomestats[1], 3)
+    deltaMoney = round(utilityUsage*5 + factoryNumber*10 - treeNumber*8.5 + outcomestats[0], 3)
+    deltaHappiness = round(utilityUsage*0.003 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3)
 
 
     year += 1
@@ -292,8 +293,20 @@ actionBar.place(relheight=1, relwidth=0.3, relx=0, rely=0)
 actionBarTitle = tk.Label(actionBar, text="Your Options", font=("Cambria", 15, "bold"), bg="#f3efe1")
 actionBarTitle.place(relx = 0.05, rely = 0.05, relheight=0.06, relwidth=0.9)
 
+yearlabelDisplay = tk.Label(actionBar, text="Current year:", font=("Cambria", 20), bg="#d6cfb7")
+yearlabelDisplay.place(relx = 0.05, rely = 0.15, relheight=0.05, relwidth=0.9)
 yearDisplay = tk.Label(actionBar, text="2023", font=("Cambria", 30, "bold"), bg="#d6cfb7")
-yearDisplay.place(relx = 0.05, rely = 0.12, relheight=0.06, relwidth=0.9)
+yearDisplay.place(relx = 0.05, rely = 0.2, relheight=0.06, relwidth=0.9)
+
+objective = tk.Label(actionBar, text="Your objective: \n reduce carbon levels to \n below 270 ppm by 2050.", font=("Cambria", 14), bg="#d6cfb7")
+objective.place(relx = 0.05, rely = 0.29, relheight=0.1, relwidth=0.9)
+
+currentCO2label = tk.Label(actionBar, text="Current carbon levels:", font=("Cambria", 14), bg="#d6cfb7")
+currentCO2label.place(relx = 0.05, rely = 0.42, relheight=0.1, relwidth=0.9)
+
+currentCO2 = tk.Label(actionBar, text="412 ppm", font=("Cambria", 18, "bold"), bg="#d6cfb7")
+currentCO2.place(relx = 0.05, rely = 0.48, relheight=0.08, relwidth=0.9)
+
 
 #TODO: ADD COMMAND FOR CHANGE TREES
 addTreesButton = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=addTrees)
