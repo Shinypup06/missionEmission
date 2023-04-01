@@ -102,6 +102,13 @@ def executeSituation():
     outcome1stats = Situations.outcome1s[randnum][1:3]
     outcome2stats = Situations.outcome2s[randnum][1:3]
 
+def endturn():
+    calcDeltas(outcomeStats)
+    money += deltaMoney
+    carbon += deltaCO2
+    happiness += deltaHappiness
+    updateResourceLabels()
+    situationFrame.lift()
 
 
 
