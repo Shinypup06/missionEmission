@@ -89,10 +89,22 @@ def calcDeltas(stats):
     
 
 def executeSituation():
-    stats = Situations.createSituation(situationNumber)
-    return stats
+    randnum = random.randint(0, 27)
+    while True:
+        if randnum in usedSituations:
+            randnum = random.randint(0, 27)
+        else:
+            usedSituations.append(randnum)
+            break
+    desc = Situations.descriptions[randnum]
+    outcome1desc = Situations.outcome1s[randnum][0]
+    outcome2desc = Situations.outcome2s[randnum][0]
+    outcome1stats = Situations.outcome1s[randnum][1:3]
+    outcome2stats = Situations.outcome2s[randnum][1:3]
 
-    
+
+
+
 
 
 
