@@ -1,4 +1,5 @@
 import variables
+import Situations
 
 name = input(
 
@@ -75,20 +76,38 @@ while True:
             carbon += deltaCO2
             happiness += deltaHappiness
     elif int(option) == 2:
+        
         while True:
             choice = input(f"""
             Trees Planted per turn: {treeNumber}
             Utility Usage per turn: {utilityUsage}
             Factories in Operation: {factoryNumber}
 
-            What would you like to do?
-            1 - increase Trees Planted
-            2 - increase Utility usage
-            3 - increase Factories
+            Current Effects that will apply Next Turn:
+            Projected change in CO2: {deltaCO2}
+            Projected change in money: {deltaMoney}
+            Projected change in approval: {deltaHappiness}
+
+            What would you like to do? 
+            1 - change Trees Planted (decreases CO2 and increases approval but costs money)
+            2 - change Utility usage (increases CO2 and increases money from tax revenue, but decreasing utility usage will cause citizens' approval to go way down however)
+            3 - change Factories (decreases citizens' approval and increases CO2 and makes a high amount of tax revenue)
             4 - return to Menu
             """)
 
-
-
+            if int(choice) == 1:
+                treeNumber += 1
+                print("Number of trees planted per turn increased.")
+                increased = True
+            elif int(choice) == 2:
+                treeNumber += 1
+                print("Number of trees planted per turn increased.")
+                increased = True
+            elif int(choice) == 3:
+                treeNumber += 1
+                print("Number of trees planted per turn increased.")
+                increased = True
+            elif int(choice) == 4:
+                break
     else:
         input("error, please try again")
