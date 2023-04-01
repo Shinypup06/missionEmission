@@ -37,6 +37,10 @@ global deltaCO2
 global deltaMoney
 global deltaHappiness
 
+deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
+deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
+deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
+
 firstYearPassed = False
 
 usedSituations = []
@@ -65,6 +69,17 @@ def addUtility():
 
 def subtractUtility():
     utilityUsage -= 1
+
+def addFactory():
+    factoryNumber += 1
+
+def subtractFactory():
+    factoryNumber -= 1
+
+def calcDeltas():
+    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
+    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
+    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
 
 while True:
     if firstYearPassed:
@@ -112,12 +127,7 @@ while True:
         To win, fulfill all CO2 objectives while managing money and civilian happiness in 2050.
         Good luck!
         """)
-    elif int(option) == 6:
-        yn = input("""
-        Are you sure you want to exit? (Y/N):
-        """) 
-        if yn == "Yes" or yn == "Y" or yn == "YES" or yn == "yes":
-            break
+    
     elif int(option) == 2:
         while True:
             deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
