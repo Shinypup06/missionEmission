@@ -1,5 +1,5 @@
 import tkinter as tk
-
+from PIL import ImageTk, Image
 
 HEIGHT = 700
 WIDTH = 1200
@@ -7,9 +7,21 @@ WIDTH = 1200
 def closeTutorial():
     tutorialFrame.lower()
 
+def selectMChar():
+    character["image"] = mchar
+    charSelectFrame.lower()
+
+def selectFChar():
+    character["image"] = fchar
+    charSelectFrame.lower()
+
 root = tk.Tk()
-#temp
-char = tk.PhotoImage(file="mChar.png")
+#images
+mchar = tk.PhotoImage(file="mChar.png")
+fchar = tk.PhotoImage(file="fChar.png")
+nochar = tk.PhotoImage(file="nochar.png")
+smallmchar = ImageTk.PhotoImage(Image.open("mChar.png").resize((200, 200), Image.ANTIALIAS))
+smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((200, 200), Image.ANTIALIAS))
 
 #this is just here to reserve the space on the gui
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
@@ -23,7 +35,7 @@ mainFrame.place(relheight = 1, relwidth=1, relx=0, rely=0)
 
 charFrame = tk.Frame(mainFrame, bg="white")
 charFrame.place(relx=0.3, rely=0, relheight=0.55, relwidth=0.7)
-character = tk.Label(charFrame, image=char, bg="white")
+character = tk.Label(charFrame, image=nochar, bg="white")
 character.place(relx = 0.2, rely=0.15, relwidth=0.6, relheight=0.8)
 
 
@@ -74,7 +86,14 @@ tutorialOK=tk.Button(tutorialFrame, text= "Ok, let's play!", background="#f3efe1
 tutorialOK.place(relx=0.3, rely=0.8, relheight=0.15, relwidth=0.4)
 
 #character select
+charSelectFrame =tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+charSelectFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
+mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=selectMChar, bg="white")
+mCharButton.place(relx=0.15, rely= 0.3, relheight= 0.6, relwidth= 0.3)
+
+fCharButton = tk.Button(charSelectFrame, image=smallfchar, command=selectFChar, bg="white")
+fCharButton.place(relx=0.55, rely= 0.3, relheight= 0.6, relwidth= 0.3)
 
 root.title("Mission: Emission")
 root.mainloop()
