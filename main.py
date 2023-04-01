@@ -20,19 +20,23 @@ treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
 
+objectiveCO2 = 380
 
+global deltaCO2
+global deltaMoney
+global deltaHappiness
 
 while True:
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
-    deltaHappiness = utilityUsage*0.05 + treeNumber*0.01 - factoryNumber*0.02 - 0.01
+    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
     option = input(
         f"""
-        Money: ${money}\tCO2 Levels: {carbon} ppm\tApproval Rating: {happiness*10}%
+        Money: ${money}\tCO2 Levels: {carbon} ppm\tApproval Rating: {happiness*100}%
         Welcome to Home. The year is Year {year}, Month {months*6+1}. 
         Projected change in CO2: {deltaCO2}
         Projected change in money: {deltaMoney}
-        Projected change in approval: {deltaHappiness}
+        Projected change in approval: {round(deltaHappiness*100, 3)}%
         Please choose one of the following:
         0 - Next Turn
         1 - View Bills
@@ -78,6 +82,9 @@ while True:
     elif int(option) == 2:
         
         while True:
+            deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
+            deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
+            deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
             choice = input(f"""
             Trees Planted per turn: {treeNumber}
             Utility Usage per turn: {utilityUsage}
@@ -86,7 +93,7 @@ while True:
             Current Effects that will apply Next Turn:
             Projected change in CO2: {deltaCO2}
             Projected change in money: {deltaMoney}
-            Projected change in approval: {deltaHappiness}
+            Projected change in approval: {round(deltaHappiness*100, 3)}%
 
             What would you like to do? 
             1 - change Trees Planted (decreases CO2 and increases approval but costs money)
