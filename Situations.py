@@ -56,7 +56,7 @@ outcome1s = {
 20: ("\n1. Protest the bill", 0, 0, .04),
 21: ("\n1. Convert the forest into a national park", -20, -25, .2),
 22: ("\n1. Clear out the smog", -8, -10, .07),
-23: ("\n1. Give medical aid to those effected", -10, 0, .13),
+23: ("\n1. Give medical aid to those affected", -10, 0, .13),
 24: ("\n1. Make a statement assuring everyone that there is no need to worry", 0, 0, -.05),
 25: ("\n1. Accept the refugees", -10, 0, .06),
 26: ("\n1. Spend money to immediately douse the fire", -.04, -.03, .04)
