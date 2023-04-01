@@ -49,25 +49,37 @@ statsFrame.place(relheight=0.45, relwidth=0.7, relx = 0.3, rely=0.55)
 
 approvalBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
 approvalBar.place(relx=0.2, rely = 0.2, relheight= 0.1, relwidth=0.6)
+
+#TODO: approvalbarvalue changes with approval rating. need to update
 approvalBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 approvalBarValue.place(relx=0.203, rely = 0.206, relheight= 0.088, relwidth=0.594 * 0.6)
-approvalLabel = tk.Label(statsFrame, text="Approval: ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
-approvalLabel.place(relx=0.1, rely=0.206, relheight=0.088, relwidth=0.1)
+approvalLabel = tk.Label(statsFrame, text="Approval (%): ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+approvalLabel.place(relx=0.06, rely=0.206, relheight=0.088, relwidth=0.14)
+
+#TODO: this is the number changed when approval rating changes.
+approval = tk.Label(statsFrame, text="60", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+approval.place(relx=0.8, rely=0.206, relheight=0.088, relwidth=0.05)
+
 
 moneyBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
 moneyBar.place(relx=0.2, rely = 0.45, relheight= 0.1, relwidth=0.6)
 moneyBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
-moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.494 * 0.5)
-moneyLabel = tk.Label(statsFrame, text="Budget: ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
-moneyLabel.place(relx=0.1, rely = 0.456, relheight= 0.088, relwidth=0.1)
+moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594 * 0.5)
+moneyLabel = tk.Label(statsFrame, text="Budget ($k): ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+moneyLabel.place(relx=0.06, rely = 0.456, relheight= 0.088, relwidth=0.14)
+
+money = tk.Label(statsFrame, text="100", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+money.place(relx=0.8, rely=0.456, relheight=0.088, relwidth=0.05)
 
 carbonBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
 carbonBar.place(relx=0.2, rely = 0.7, relheight= 0.1, relwidth=0.6)
 carbonBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * 1)
-carbonLabel = tk.Label(statsFrame, text="Carbon: ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
-carbonLabel.place(relx=0.1, rely = 0.706, relheight= 0.088, relwidth=0.1)
+carbonLabel = tk.Label(statsFrame, text="Carbon (ppm): ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+carbonLabel.place(relx=0.06, rely = 0.706, relheight= 0.088, relwidth=0.14)
 
+carbon = tk.Label(statsFrame, text="412", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+carbon.place(relx=0.8, rely=0.706, relheight=0.088, relwidth=0.05)
 
 
 actionBar = tk.Frame(mainFrame, bg="#d6cfb7")
