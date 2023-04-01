@@ -4,6 +4,8 @@ from PIL import ImageTk, Image
 HEIGHT = 700
 WIDTH = 1200
 
+
+
 def closeTutorial():
     tutorialFrame.lower()
 
@@ -16,6 +18,8 @@ def selectFChar():
     charSelectFrame.lower()
 
 root = tk.Tk()
+
+
 #images
 mchar = tk.PhotoImage(file="mChar.png")
 fchar = tk.PhotoImage(file="fChar.png")
@@ -47,16 +51,22 @@ approvalBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", hi
 approvalBar.place(relx=0.2, rely = 0.2, relheight= 0.1, relwidth=0.6)
 approvalBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 approvalBarValue.place(relx=0.203, rely = 0.206, relheight= 0.088, relwidth=0.594 * 0.6)
+approvalLabel = tk.Label(statsFrame, text="Approval: ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+approvalLabel.place(relx=0.1, rely=0.206, relheight=0.088, relwidth=0.1)
 
 moneyBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
 moneyBar.place(relx=0.2, rely = 0.45, relheight= 0.1, relwidth=0.6)
 moneyBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.494 * 0.5)
+moneyLabel = tk.Label(statsFrame, text="Budget: ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+moneyLabel.place(relx=0.1, rely = 0.456, relheight= 0.088, relwidth=0.1)
 
 carbonBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
 carbonBar.place(relx=0.2, rely = 0.7, relheight= 0.1, relwidth=0.6)
 carbonBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * 1)
+carbonLabel = tk.Label(statsFrame, text="Carbon: ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+carbonLabel.place(relx=0.1, rely = 0.706, relheight= 0.088, relwidth=0.1)
 
 
 
@@ -79,7 +89,7 @@ tutorialFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 tutorialTitle = tk.Label(tutorialFrame, font = ("Cambria", 16, "bold"), text= "Welcome to the Mission: Emission!", bg="white")
 tutorialTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
-tutorialText = tk.Label(tutorialFrame, font= ("Cambria", 12), bg="white", text="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm. \n Currently, it is at 412ppm. \n Each action will affect your approval, economy and carbon footprint. \n if your approval goes below 30%, you will be fired. \n if your money runs below 0, your city goes bankrupt. \n To win, fulfill all CO2 objectives while managing money and approval until 2050.")
+tutorialText = tk.Label(tutorialFrame, font= ("Cambria", 12), bg="white", text="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm. \n Currently, it is at 412ppm. \n Each action will affect your approval, economy and carbon footprint. \n If your approval goes below 30%, you will be fired. \n If your money runs below 0, your city goes bankrupt. \n To win, fulfill all CO2 objectives while managing money and approval until 2050.")
 tutorialText.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
 tutorialOK=tk.Button(tutorialFrame, text= "Ok, let's play!", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=closeTutorial)
@@ -88,6 +98,9 @@ tutorialOK.place(relx=0.3, rely=0.8, relheight=0.15, relwidth=0.4)
 #character select
 charSelectFrame =tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
 charSelectFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
+
+charSelectTitle = tk.Label(charSelectFrame, font = ("Cambria", 16, "bold"), text= "Select Character", bg="white")
+charSelectTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
 mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=selectMChar, bg="white")
 mCharButton.place(relx=0.15, rely= 0.3, relheight= 0.6, relwidth= 0.3)
