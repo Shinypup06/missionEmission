@@ -102,7 +102,25 @@ def executeSituation():
     outcome1stats = Situations.outcome1s[randnum][1:3]
     outcome2stats = Situations.outcome2s[randnum][1:3]
 
+def endturn():
+    calcDeltas(outcomeStats)
+    money += deltaMoney
+    carbon += deltaCO2
+    happiness += deltaHappiness
+    updateResourceLabels()
+    situationFrame.lift()
 
+def losing():
+    if money < 0:
+        loseScreen["text"] = "You went bankrupt and your department has been disbanded."
+    elif carbon > 549:
+        loseScreen["text"] = "You went above the carbon emissions limit and you have been fired for failing to prevent carbon emission rates from skyrocketing"
+    elif happiness < 20:
+        loseScreen["text"] = "You were too unpopular and you have been fired due to popular discontent"
+    elif year == 2050 and carbon > 270:
+        loseScreen["text"] = "You were unable to reach the 2050 carbon emission target, despite your impressive money and approval management skills."
+        
+        
 
 
 

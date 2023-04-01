@@ -1,5 +1,7 @@
 import tkinter as tk
 from PIL import ImageTk, Image
+import random
+import Situations
 
 HEIGHT = 700
 WIDTH = 1200
@@ -14,6 +16,16 @@ year = 2023
 treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
+
+def updateResourceLabels():
+    approvalBarValue["relwidth"] = 0.594 * happiness
+    approvalValue["text"] = f"{round(happiness*100, 3)}%"
+    moneyBarValue["relwidth"] = 0.594 * (money/100) * 0.5
+    if (money/100)*0.5 > 1:
+        moneyBarValue["relwidth"] = 0.594
+    moneyValue["text"] = f"{money}"
+    carbonBarValue["relwidth"] = 0.594 * (carbon/412) * 0.75
+    carbonValue["text"] = f"{carbon}"
 
 def addTrees():
     global treeNumber
@@ -72,9 +84,56 @@ def selectFChar(entry):
     situationTitle["text"] = "Important Message for Mayor " + name + "!"
     charSelectFrame.lower()
 
+usedSituations = []
+outcomestats = (0, 0, 0)
+
+def generateSituation():
+    global randnum
+    randnum = random.randint(0, 27)
+    while True:
+        if randnum in usedSituations:
+            randnum = random.randint(0, 27)
+        else:
+            usedSituations.append(randnum)
+            break
+    situationText["text"] = Situations.descriptions[randnum] + Situations.outcome1s[randnum][0] + Situations.outcome2s[randnum][0]
+    situationFrame.lift()
+        
+def executeSituation(num):
+    global outcomestats
+    if(num == 1):
+        outcomestats = Situations.outcome1s[randnum][1:3]
+    if(num == 2):
+        outcomestats = Situations.outcome2s[randnum][1:3]
+    situationFrame.lower()
+
+
 #TODO: write this
 def endturn():
-    situationFrame.lift()
+    global year
+    global money
+    global carbon
+    global happiness
+    
+    global deltaCO2
+    global deltaMoney
+    global deltaHappiness
+
+    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + outcomestats[1]
+    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + outcomestats[0]
+    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + outcomestats[2] - 0.001, 3)
+
+    year += 1
+    money += deltaMoney
+    carbon += deltaCO2
+    happiness += deltaHappiness
+    updateResourceLabels()
+
+    if (random.randint(1,2) == 1):
+        generateSituation()
+    else:
+        outcomestats = (0, 0, 0)   
+
 
 root = tk.Tk()
 
@@ -90,6 +149,19 @@ smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((175, 175), Image
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
+#Lose case
+loseFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+loseFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
+
+loseTitle = tk.Label(loseFrame, font = ("Cambria", 16, "bold"), text= "You Lost!", bg="white")
+loseTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
+
+reason = tk.Label(loseFrame, font= ("Cambria", 12), bg="white", text="temp")
+reason.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
+
+loseButton = tk.Button(loseFrame, text= "OK", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+loseButton.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
+
 #The frame with the situation in it that pops up and disappears when you resolve it
 situationFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
 situationFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
@@ -101,8 +173,8 @@ situationTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 situationText = tk.Label(situationFrame, font= ("Cambria", 12), bg="white", text="temp")
 situationText.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
-situation1 = tk.Button(situationFrame, text= "1", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
-situation2 = tk.Button(situationFrame, text= "2", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+situation1 = tk.Button(situationFrame, text= "1", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command= lambda: executeSituation(1))
+situation2 = tk.Button(situationFrame, text= "2", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command= lambda: executeSituation(2))
 
 situation1.place(relwidth=0.3, relheight=0.1, relx = 0.15, rely = 0.7)
 situation2.place(relwidth=0.3, relheight=0.1, relx = 0.55, rely = 0.7)
@@ -218,7 +290,7 @@ utilitiesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.9)
 tutorialFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
 tutorialFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
-tutorialTitle = tk.Label(tutorialFrame, font = ("Cambria", 16, "bold"), text= "Welcome to the Mission: Emission!", bg="white")
+tutorialTitle = tk.Label(tutorialFrame, font = ("Cambria", 16, "bold"), text= "Welcome to Mission: Emission!", bg="white")
 tutorialTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
 tutorialText = tk.Label(tutorialFrame, font= ("Cambria", 12), bg="white", text="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm. \n Currently, it is at 412ppm. \n Each action will affect your approval, economy and carbon footprint. \n If your approval goes below 30%, you will be fired. \n If your money runs below 0, your city goes bankrupt. \n To win, fulfill all CO2 objectives while managing money and approval until 2050.")
