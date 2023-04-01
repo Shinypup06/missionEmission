@@ -21,9 +21,9 @@ happiness = 0.6
 
 year = 2023
 
-global treeNumber
-global utilityUsage
-global factoryNumber
+# global treeNumber
+# global utilityUsage
+# global factoryNumber
 
 treeNumber = 6
 utilityUsage = 5
@@ -31,9 +31,7 @@ factoryNumber = 4
 
 finalobj = 270
 
-global deltaCO2
-global deltaMoney
-global deltaHappiness
+
 
 deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
 deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
@@ -80,8 +78,20 @@ def addFactory():
 def subtractFactory():
     factoryNumber -= 1
 
+def calcDeltas(stats):
+    global deltaCO2
+    global deltaMoney
+    global deltaHappiness
+
+    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + stats[1]
+    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + stats[0]
+    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + stats[2] - 0.001, 3)
+    
+
 def executeSituation():
     stats = Situations.createSituation(situationNumber)
+    return stats
+
     
 
 
