@@ -4,18 +4,6 @@ from PIL import ImageTk, Image
 HEIGHT = 700
 WIDTH = 1200
 
-global money
-global carbon
-global happiness
-global year
-
-global treeNumber
-global utilityUsage
-global factoryNumber
-
-global deltaCO2
-global deltaMoney
-global deltaHappiness
 
 money = 100
 carbon = 412
@@ -27,6 +15,43 @@ treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
 
+def addTrees():
+    global treeNumber
+    if(treeNumber < 10):
+        treeNumber += 1
+    treesnum["text"]= str(treeNumber)
+#TODO: ADD ERROR MESSAGE IF TREENUMBER HITS LIMIT
+
+def subtractTrees():
+    global treeNumber
+    if(treeNumber > 0):
+        treeNumber -= 1
+    treesnum["text"]= str(treeNumber)
+
+def addUtility():
+    global utilityUsage
+    if(utilityUsage < 10):
+        utilityUsage += 1
+    utilitiesnum["text"]= str(utilityUsage)
+
+def subtractUtility():
+    global utilityUsage
+    if(utilityUsage > 0):
+        utilityUsage -= 1
+    utilitiesnum["text"]= str(utilityUsage)
+
+def addFactory():
+    global factoryNumber
+    if(factoryNumber < 10):
+        factoryNumber += 1
+    factoriesnum["text"]= str(factoryNumber)
+
+def subtractFactory():
+    global factoryNumber
+    if(factoryNumber > 0):
+        factoryNumber -= 1
+    factoriesnum["text"]= str(factoryNumber)
+    
 
 def closeTutorial():
     tutorialFrame.lower()
@@ -50,8 +75,8 @@ root = tk.Tk()
 mchar = tk.PhotoImage(file="mChar.png")
 fchar = tk.PhotoImage(file="fChar.png")
 nochar = tk.PhotoImage(file="nochar.png")
-smallmchar = ImageTk.PhotoImage(Image.open("mChar.png").resize((200, 200), Image.ANTIALIAS))
-smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((200, 200), Image.ANTIALIAS))
+smallmchar = ImageTk.PhotoImage(Image.open("mChar.png").resize((175, 175), Image.ANTIALIAS))
+smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((175, 175), Image.ANTIALIAS))
 
 #this is just here to reserve the space on the gui
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
@@ -67,6 +92,8 @@ charFrame = tk.Frame(mainFrame, bg="white")
 charFrame.place(relx=0.3, rely=0, relheight=0.55, relwidth=0.7)
 character = tk.Label(charFrame, image=nochar, bg="white")
 character.place(relx = 0.2, rely=0.15, relwidth=0.6, relheight=0.8)
+nameDisplay = tk.Label(charFrame, text= " ", font=("Cambria", 15), bg="white")
+nameDisplay.place(relx = 0.2, rely=0.05, relheight=0.1, relwidth=0.8 ) 
 
 endTurnButton = tk.Button(charFrame, text= "End Turn", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=endturn)
 endTurnButton.place(relx=0.7, rely=0.4, relheight=0.2, relwidth=0.2)
@@ -118,10 +145,10 @@ actionBarTitle = tk.Label(actionBar, text="Your Current Actions", font=("Cambria
 actionBarTitle.place(relx = 0.05, rely = 0.05, relheight=0.06, relwidth=0.9)
 
 #TODO: ADD COMMAND FOR CHANGE TREES
-addTrees = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
-subtractTrees = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
-addTrees.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.7)
-subtractTrees.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.7)
+addTreesButton = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=addTrees)
+subtractTreesButton = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=subtractTrees)
+addTreesButton.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.7)
+subtractTreesButton.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.7)
 
 treesLabel = tk.Label(actionBar, text="Amount of trees: ", font=("Cambria", 11),  bg="#d6cfb7", justify="left")
 treesLabel.place(relwidth=0.35, relheight=0.05, relx = 0.28, rely = 0.7)
@@ -131,8 +158,8 @@ treesnum = tk.Label(actionBar, text="6", font=("Cambria", 12),  bg="#d6cfb7", ju
 treesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.7)
 
 
-addFactories = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
-subtractFactories = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+addFactories = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=addFactory)
+subtractFactories = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=subtractFactory)
 addFactories.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.8)
 subtractFactories.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.8)
 
@@ -144,8 +171,8 @@ factoriesnum = tk.Label(actionBar, text="4", font=("Cambria", 12),  bg="#d6cfb7"
 factoriesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.8)
 
 
-addUtilities = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
-subtractUtilities = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+addUtilities = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=addUtility)
+subtractUtilities = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=subtractUtility)
 addUtilities.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.9)
 subtractUtilities.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.9)
 
@@ -179,13 +206,19 @@ charSelectFrame =tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e",
 charSelectFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
 charSelectTitle = tk.Label(charSelectFrame, font = ("Cambria", 16, "bold"), text= "Select Character", bg="white")
-charSelectTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
+charSelectTitle.place(relx = 0.1, rely=0.1, relheight=0.1, relwidth=0.8)
 
 mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=selectMChar, bg="white")
-mCharButton.place(relx=0.15, rely= 0.3, relheight= 0.6, relwidth= 0.3)
+mCharButton.place(relx=0.15, rely= 0.4, relheight= 0.5, relwidth= 0.3)
 
 fCharButton = tk.Button(charSelectFrame, image=smallfchar, command=selectFChar, bg="white")
-fCharButton.place(relx=0.55, rely= 0.3, relheight= 0.6, relwidth= 0.3)
+fCharButton.place(relx=0.55, rely= 0.4, relheight= 0.5, relwidth= 0.3)
+
+nameQ = tk.Label(charSelectFrame, text="Name: ", font = ("Cambria", 16, "bold"), bg="white")
+nameQ.place(relx=0.1, rely=0.25, relheight=0.1, relwidth=0.2)
+
+nameEntry = tk.Entry(charSelectFrame, font= ("Cambria",16))
+nameEntry.place(relx = 0.3, rely=0.25, relheight=0.1, relwidth=0.5)
 
 root.title("Mission: Emission")
 root.mainloop()
