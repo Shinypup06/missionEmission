@@ -6,7 +6,7 @@ class variableClass:
         self.happiness = happiness
 
     def __str__(self):
-        return f"Name: {self.name}\nMoney: {self.money}\nCarbon: {self.carbon}\nHappiness: {self.happiness}"
+        return f"Name: {self.name}\tMoney: {self.money}\tCarbon: {self.carbon}\tHappiness: {self.happiness}"
     
 
     
