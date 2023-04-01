@@ -41,8 +41,8 @@ tutorialFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 tutorialTitle = tk.Label(tutorialFrame, font = ("Cambria", 16, "bold"), text= "Welcome to the Mission: Emission!", bg="white")
 tutorialTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
-tutorialText = tk.Label(tutorialFrame, font= ("Cambria", 12), text="Welcome to ")
-tutorialText.place(relx=0.05, rely=0.3, relheight=0.45, relwidth=0.8)
+tutorialText = tk.Label(tutorialFrame, font= ("Cambria", 12), bg="white", text="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm. \n Currently, it is at 412ppm. \n Each action will affect your approval, economy and carbon footprint. \n if your approval goes below 30%, you will be fired. \n if your money runs below 0, your city goes bankrupt. \n To win, fulfill all CO2 objectives while managing money and approval until 2050.")
+tutorialText.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
 
 tutorialOK=tk.Button(tutorialFrame, text= "Ok, let's play!", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=closeTutorial)
