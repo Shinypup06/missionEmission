@@ -17,6 +17,10 @@ def selectFChar():
     character["image"] = fchar
     charSelectFrame.lower()
 
+#TODO: write this
+def endturn():
+    print("temp")
+
 root = tk.Tk()
 
 
@@ -41,6 +45,9 @@ charFrame = tk.Frame(mainFrame, bg="white")
 charFrame.place(relx=0.3, rely=0, relheight=0.55, relwidth=0.7)
 character = tk.Label(charFrame, image=nochar, bg="white")
 character.place(relx = 0.2, rely=0.15, relwidth=0.6, relheight=0.8)
+
+endTurnButton = tk.Button(charFrame, text= "End Turn", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=endturn)
+endTurnButton.place(relx=0.7, rely=0.4, relheight=0.2, relwidth=0.2)
 
 
 #statistics - bottom right
