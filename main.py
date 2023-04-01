@@ -29,11 +29,7 @@ treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
 
-<<<<<<< HEAD
 finalobj = 270
-=======
-
->>>>>>> c3f37aaf60234a097ebc05543acbe3280d77560f
 
 global deltaCO2
 global deltaMoney
@@ -47,8 +43,7 @@ usedSituations = []
 
 
 
-def updatePassiveLabels():
-    
+
 
 def updateResourceLabels():
     approvalBarValue["relwidth"] = 0.594 * happiness
@@ -61,18 +56,7 @@ def updateResourceLabels():
     carbon["text"] = f"{carbon}"
 
 def endTurn():
-<<<<<<< HEAD
     year += 1
-=======
-    firstYearPassed = True
-    if months == 1:
-        months = 0
-        print(months)
-        year += 1
-    elif months == 0:
-        months += 1
-
->>>>>>> c3f37aaf60234a097ebc05543acbe3280d77560f
     money += deltaMoney
     carbon += deltaCO2
     happiness += deltaHappiness
@@ -95,7 +79,6 @@ def addFactory():
 
 def subtractFactory():
     factoryNumber -= 1
-<<<<<<< HEAD
 
 def executeSituation():
     stats = Situations.createSituation(situationNumber)
@@ -108,29 +91,15 @@ def executeSituation():
 
 
 
-=======
-
-def calcDeltas():
-    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
-    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
-    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
-
->>>>>>> c3f37aaf60234a097ebc05543acbe3280d77560f
 while True:
-    if firstYearPassed:
-        print("Congrats on your first year. From now on, special Situations may pop up that may impact CO2, finances, and approval.")
-        if random.randint(0, 1) == 1:
-            situationNumber = random.randint(0, 26)
-            while True:
-                if (usedSituations.count(situationNumber) > 0):
-                    situationNumber = random.randint(0, 26)
-                else:
-                    break
-            Situations.createSituation(situationNumber)
-
-                    
-
-
+    if random.randint(0, 1) == 1:
+        situationNumber = random.randint(0, 26)
+        while True:
+            if (usedSituations.count(situationNumber) > 0):
+                situationNumber = random.randint(0, 26)
+            else:
+                break
+        Situations.createSituation(situationNumber)
 
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
