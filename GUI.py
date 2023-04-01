@@ -87,8 +87,8 @@ def selectFChar(entry):
 usedSituations = []
 outcomestats = (0, 0, 0)
 
-def executeSituation(num):
-    global outcomestats
+def generateSituation():
+    global randnum
     randnum = random.randint(0, 27)
     while True:
         if randnum in usedSituations:
@@ -97,10 +97,16 @@ def executeSituation(num):
             usedSituations.append(randnum)
             break
     situationText["text"] = Situations.descriptions[randnum] + Situations.outcome1s[randnum][0] + Situations.outcome2s[randnum][0]
+    situationFrame.lift()
+    
+    
+def executeSituation(num):
+    global outcomestats
     if(num == 1):
         outcomestats = Situations.outcome1s[randnum][1:3]
     if(num == 2):
         outcomestats = Situations.outcome2s[randnum][1:3]
+    situationFrame.lower()
 
 
 #TODO: write this
@@ -124,8 +130,10 @@ def endturn():
     happiness += deltaHappiness
     updateResourceLabels()
 
-
-    situationFrame.lift()    
+    if (random.randint(1,2) == 1):
+        generateSituation()
+    else:
+        outcomestats = (0, 0, 0)   
 
 
 root = tk.Tk()
