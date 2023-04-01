@@ -1,4 +1,3 @@
-import variables
 import Situations
 import random
 
@@ -21,38 +20,45 @@ carbon = 412
 happiness = 0.6
 
 year = 2023
-months = 1
 
-global treeNumber
-global utilityUsage
-global factoryNumber
+# global treeNumber
+# global utilityUsage
+# global factoryNumber
 
 treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
 
-objectiveCO2 = 380
+finalobj = 270
 
-global deltaCO2
-global deltaMoney
-global deltaHappiness
 
-firstYearPassed = False
+
+deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
+deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
+deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
 
 usedSituations = []
 
-def endTurn():
-    firstYearPassed = True
-    if months == 1:
-        months = 0
-        print(months)
-        year += 1
-    elif months == 0:
-        months += 1
 
+
+
+
+def updateResourceLabels():
+    approvalBarValue["relwidth"] = 0.594 * happiness
+    approval["text"] = f"{round(happiness*100, 3)}%"
+    moneyBarValue["relwidth"] = 0.594 * (money/100) * 0.5
+    if (money/100)*0.5 > 1:
+        moneyBarValue["relwidth"] = 0.594
+    money["text"] = f"{money}"
+    carbonBarValue["relwidth"] = 0.594 * (carbon/412) * 0.75
+    carbon["text"] = f"{carbon}"
+
+def endTurn():
+    year += 1
     money += deltaMoney
     carbon += deltaCO2
     happiness += deltaHappiness
+    updateResourceLabels()
 
 def addTrees():
     treeNumber += 1
@@ -66,21 +72,56 @@ def addUtility():
 def subtractUtility():
     utilityUsage -= 1
 
+def addFactory():
+    factoryNumber += 1
+
+def subtractFactory():
+    factoryNumber -= 1
+
+def calcDeltas(stats):
+    global deltaCO2
+    global deltaMoney
+    global deltaHappiness
+
+    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + stats[1]
+    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + stats[0]
+    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + stats[2] - 0.001, 3)
+    
+
+def executeSituation():
+    randnum = random.randint(0, 27)
+    while True:
+        if randnum in usedSituations:
+            randnum = random.randint(0, 27)
+        else:
+            usedSituations.append(randnum)
+            break
+    desc = Situations.descriptions[randnum]
+    outcome1desc = Situations.outcome1s[randnum][0]
+    outcome2desc = Situations.outcome2s[randnum][0]
+    outcome1stats = Situations.outcome1s[randnum][1:3]
+    outcome2stats = Situations.outcome2s[randnum][1:3]
+
+
+
+
+
+
+
+
+
+
+
+
 while True:
-    if firstYearPassed:
-        print("Congrats on your first year. From now on, special Situations may pop up that may impact CO2, finances, and approval.")
-        if random.randint(0, 1) == 1:
-            situationNumber = random.randint(0, 26)
-            while True:
-                if (usedSituations.count(situationNumber) > 0):
-                    situationNumber = random.randint(0, 26)
-                else:
-                    break
-            Situations.createSituation(situationNumber)
-
-                    
-
-
+    if random.randint(0, 1) == 1:
+        situationNumber = random.randint(0, 26)
+        while True:
+            if (usedSituations.count(situationNumber) > 0):
+                situationNumber = random.randint(0, 26)
+            else:
+                break
+        Situations.createSituation(situationNumber)
 
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
@@ -88,7 +129,7 @@ while True:
     option = input(
         f"""
         Money: ${money}\tCO2 Levels: {carbon} ppm\tApproval Rating: {happiness*100}%
-        Welcome to Home. The year is Year {year}, Month {months*6+1}. 
+        Welcome to Home. The year is Year {year}. 
         Projected change in CO2: {deltaCO2}
         Projected change in money: {deltaMoney}
         Projected change in approval: {round(deltaHappiness*100, 3)}%
@@ -112,12 +153,7 @@ while True:
         To win, fulfill all CO2 objectives while managing money and civilian happiness in 2050.
         Good luck!
         """)
-    elif int(option) == 6:
-        yn = input("""
-        Are you sure you want to exit? (Y/N):
-        """) 
-        if yn == "Yes" or yn == "Y" or yn == "YES" or yn == "yes":
-            break
+    
     elif int(option) == 2:
         while True:
             deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
