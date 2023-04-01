@@ -30,8 +30,7 @@ treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
 
-objectiveCO2 = 380
-finalobj = 270
+
 
 global deltaCO2
 global deltaMoney
@@ -47,7 +46,13 @@ usedSituations = []
 
 def endTurn():
     firstYearPassed = True
-    year += 1
+    if months == 1:
+        months = 0
+        print(months)
+        year += 1
+    elif months == 0:
+        months += 1
+
     money += deltaMoney
     carbon += deltaCO2
     happiness += deltaHappiness
@@ -69,26 +74,27 @@ def addFactory():
 
 def subtractFactory():
     factoryNumber -= 1
-    calcDeltas()
 
 def calcDeltas():
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
     deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
 
-def executeSituation():
-    stats = Situations.createSituation(situationNumber)
-    
-
 while True:
-    if random.randint(0, 1) == 1:
-        situationNumber = random.randint(0, 26)
-        while True:
-            if (usedSituations.count(situationNumber) > 0):
-                situationNumber = random.randint(0, 26)
-            else:
-                break
-        Situations.createSituation(situationNumber)
+    if firstYearPassed:
+        print("Congrats on your first year. From now on, special Situations may pop up that may impact CO2, finances, and approval.")
+        if random.randint(0, 1) == 1:
+            situationNumber = random.randint(0, 26)
+            while True:
+                if (usedSituations.count(situationNumber) > 0):
+                    situationNumber = random.randint(0, 26)
+                else:
+                    break
+            Situations.createSituation(situationNumber)
+
+                    
+
+
 
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10

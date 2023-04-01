@@ -4,6 +4,28 @@ from PIL import ImageTk, Image
 HEIGHT = 700
 WIDTH = 1200
 
+global money
+global carbon
+global happiness
+global year
+
+global treeNumber
+global utilityUsage
+global factoryNumber
+
+global deltaCO2
+global deltaMoney
+global deltaHappiness
+
+money = 100
+carbon = 412
+happiness = 0.6
+
+year = 2023
+
+treeNumber = 6
+utilityUsage = 5
+factoryNumber = 4
 
 
 def closeTutorial():
