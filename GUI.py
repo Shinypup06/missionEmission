@@ -68,7 +68,7 @@ def subtractFactory():
     if(factoryNumber > 0):
         factoryNumber -= 1
     factoriesnum["text"]= str(factoryNumber)
-    
+
 
 def closeTutorial():
     tutorialFrame.lower()
@@ -155,7 +155,10 @@ def endturn():
     yearDisplay["text"] = str(year)
     money += deltaMoney
     carbon += deltaCO2
-    happiness += deltaHappiness
+    if (happiness + deltaHappiness > 1):
+        happiness = 1
+    else:
+        happiness += deltaHappiness
     updateResourceLabels()
 
     checkWinLoss()
