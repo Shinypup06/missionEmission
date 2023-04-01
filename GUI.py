@@ -18,13 +18,18 @@ utilityUsage = 5
 factoryNumber = 4
 
 def updateResourceLabels():
-    approvalBarValue["relwidth"] = 0.594 * happiness
-    approvalValue["text"] = f"{round(happiness*100, 3)}%"
-    moneyBarValue["relwidth"] = 0.594 * (money/100) * 0.5
+    approvalBarValue.place(relx=0.203, rely = 0.206, relheight= 0.088, relwidth=0.594 * happiness)
+    approvalValue["text"] = f"{round(happiness*100, 3)}%" 
     if (money/100)*0.5 > 1:
-        moneyBarValue["relwidth"] = 0.594
+        moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594)
+    else:
+        moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594 * (money/100) * 0.5)
     moneyValue["text"] = f"{money}"
-    carbonBarValue["relwidth"] = 0.594 * (carbon/412) * 0.75
+
+    if ((carbon/412) * 0.75 > 549):
+        carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594)
+    else:
+        carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * (carbon/412) * 0.75)
     carbonValue["text"] = f"{carbon}"
 
 def addTrees():
@@ -102,9 +107,9 @@ def generateSituation():
 def executeSituation(num):
     global outcomestats
     if(num == 1):
-        outcomestats = Situations.outcome1s[randnum][1:3]
+        outcomestats = Situations.outcome1s[randnum][1:4]
     if(num == 2):
-        outcomestats = Situations.outcome2s[randnum][1:3]
+        outcomestats = Situations.outcome2s[randnum][1:4]
     situationFrame.lower()
 
 def checkWinLoss():
@@ -126,6 +131,8 @@ def checkWinLoss():
 
 
 def endturn():
+    
+    global outcomestats
     global year
     global money
     global carbon
@@ -135,7 +142,9 @@ def endturn():
     global deltaMoney
     global deltaHappiness
 
-    checkWinLoss()
+    print(outcomestats)
+
+    
 
     deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + outcomestats[1]
     deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + outcomestats[0]
@@ -143,10 +152,13 @@ def endturn():
 
 
     year += 1
+    yearDisplay["text"] = str(year)
     money += deltaMoney
     carbon += deltaCO2
     happiness += deltaHappiness
     updateResourceLabels()
+
+    checkWinLoss()
 
     if (random.randint(1,2) == 1):
         generateSituation()
@@ -274,8 +286,11 @@ carbonValue.place(relx=0.8, rely=0.706, relheight=0.088, relwidth=0.05)
 actionBar = tk.Frame(mainFrame, bg="#d6cfb7")
 actionBar.place(relheight=1, relwidth=0.3, relx=0, rely=0)
 
-actionBarTitle = tk.Label(actionBar, text="Your Current Actions", font=("Cambria", 15, "bold"), bg="#f3efe1")
+actionBarTitle = tk.Label(actionBar, text="Your Options", font=("Cambria", 15, "bold"), bg="#f3efe1")
 actionBarTitle.place(relx = 0.05, rely = 0.05, relheight=0.06, relwidth=0.9)
+
+yearDisplay = tk.Label(actionBar, text="2023", font=("Cambria", 30, "bold"), bg="#d6cfb7")
+yearDisplay.place(relx = 0.05, rely = 0.12, relheight=0.06, relwidth=0.9)
 
 #TODO: ADD COMMAND FOR CHANGE TREES
 addTreesButton = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", command=addTrees)
