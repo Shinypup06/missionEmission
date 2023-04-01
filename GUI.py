@@ -8,17 +8,20 @@ def closeTutorial():
     tutorialFrame.lower()
 
 def selectMChar():
-    character ["image"] = "mChar.png"
+    character["image"] = mchar
     charSelectFrame.lower()
 
+def selectFChar():
+    character["image"] = fchar
+    charSelectFrame.lower()
 
 root = tk.Tk()
 #images
 mchar = tk.PhotoImage(file="mChar.png")
 fchar = tk.PhotoImage(file="fChar.png")
 nochar = tk.PhotoImage(file="nochar.png")
-smallmchar = ImageTk.PhotoImage(Image.open("mChar.png").resize((150, 150), Image.ANTIALIAS))
-smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((150, 150), Image.ANTIALIAS))
+smallmchar = ImageTk.PhotoImage(Image.open("mChar.png").resize((200, 200), Image.ANTIALIAS))
+smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((200, 200), Image.ANTIALIAS))
 
 #this is just here to reserve the space on the gui
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
@@ -86,8 +89,11 @@ tutorialOK.place(relx=0.3, rely=0.8, relheight=0.15, relwidth=0.4)
 charSelectFrame =tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
 charSelectFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
-mCharButton = tk.Button(root, image=smallmchar, command=selectMChar)
-mCharButton.place(relx=0.2, rely= 0.2, relheight= 0.4, relwidth= 0.3)
+mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=selectMChar, bg="white")
+mCharButton.place(relx=0.15, rely= 0.3, relheight= 0.6, relwidth= 0.3)
+
+fCharButton = tk.Button(charSelectFrame, image=smallfchar, command=selectFChar, bg="white")
+fCharButton.place(relx=0.55, rely= 0.3, relheight= 0.6, relwidth= 0.3)
 
 root.title("Mission: Emission")
 root.mainloop()
