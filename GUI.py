@@ -86,8 +86,8 @@ approvalLabel = tk.Label(statsFrame, text="Approval (%): ", font=("Cambria", 12)
 approvalLabel.place(relx=0.06, rely=0.206, relheight=0.088, relwidth=0.14)
 
 #TODO: this is the number changed when approval rating changes.
-approval = tk.Label(statsFrame, text="60", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
-approval.place(relx=0.8, rely=0.206, relheight=0.088, relwidth=0.05)
+approvalValue = tk.Label(statsFrame, text="60", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+approvalValue.place(relx=0.8, rely=0.206, relheight=0.088, relwidth=0.05)
 
 
 moneyBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
@@ -97,18 +97,18 @@ moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594 *
 moneyLabel = tk.Label(statsFrame, text="Budget ($k): ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
 moneyLabel.place(relx=0.06, rely = 0.456, relheight= 0.088, relwidth=0.14)
 
-money = tk.Label(statsFrame, text="100", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
-money.place(relx=0.8, rely=0.456, relheight=0.088, relwidth=0.05)
+moneyValue = tk.Label(statsFrame, text="100", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+moneyValue.place(relx=0.8, rely=0.456, relheight=0.088, relwidth=0.05)
 
 carbonBar = tk.Frame(statsFrame, bg="white", highlightbackground="#a69d80", highlightthickness=2)
 carbonBar.place(relx=0.2, rely = 0.7, relheight= 0.1, relwidth=0.6)
 carbonBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
-carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * 1)
+carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * 0.75)
 carbonLabel = tk.Label(statsFrame, text="Carbon (ppm): ", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
 carbonLabel.place(relx=0.06, rely = 0.706, relheight= 0.088, relwidth=0.14)
 
-carbon = tk.Label(statsFrame, text="412", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
-carbon.place(relx=0.8, rely=0.706, relheight=0.088, relwidth=0.05)
+carbonValue = tk.Label(statsFrame, text="412", font=("Cambria", 12),  bg="#f8f6f2", justify="left")
+carbonValue.place(relx=0.8, rely=0.706, relheight=0.088, relwidth=0.05)
 
 
 actionBar = tk.Frame(mainFrame, bg="#d6cfb7")
@@ -117,6 +117,44 @@ actionBar.place(relheight=1, relwidth=0.3, relx=0, rely=0)
 actionBarTitle = tk.Label(actionBar, text="Your Current Actions", font=("Cambria", 15, "bold"), bg="#f3efe1")
 actionBarTitle.place(relx = 0.05, rely = 0.05, relheight=0.06, relwidth=0.9)
 
+#TODO: ADD COMMAND FOR CHANGE TREES
+addTrees = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+subtractTrees = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+addTrees.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.7)
+subtractTrees.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.7)
+
+treesLabel = tk.Label(actionBar, text="Amount of trees: ", font=("Cambria", 11),  bg="#d6cfb7", justify="left")
+treesLabel.place(relwidth=0.35, relheight=0.05, relx = 0.28, rely = 0.7)
+
+#TODO: REPLACE NUM OF TREES WITH UPDATED VALUE IN FUNCTION
+treesnum = tk.Label(actionBar, text="6", font=("Cambria", 12),  bg="#d6cfb7", justify="left")
+treesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.7)
+
+
+addFactories = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+subtractFactories = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+addFactories.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.8)
+subtractFactories.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.8)
+
+factoriesLabel = tk.Label(actionBar, text="Amount of Factories: ", font=("Cambria", 11),  bg="#d6cfb7", justify="left")
+factoriesLabel.place(relwidth=0.36, relheight=0.05, relx = 0.27, rely = 0.8)
+
+#TODO: REPLACE NUM OF FACTORIES WITH UPDATED VALUE IN FUNCTION
+factoriesnum = tk.Label(actionBar, text="4", font=("Cambria", 12),  bg="#d6cfb7", justify="left")
+factoriesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.8)
+
+
+addUtilities = tk.Button(actionBar, text= "+", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+subtractUtilities = tk.Button(actionBar, text= "-", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1")
+addUtilities.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.9)
+subtractUtilities.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.9)
+
+utilitiesLabel = tk.Label(actionBar, text="Amount of Utilities: ", font=("Cambria", 11),  bg="#d6cfb7", justify="left")
+utilitiesLabel.place(relwidth=0.36, relheight=0.05, relx = 0.27, rely = 0.9)
+
+#TODO: REPLACE NUM OF FACTORIES WITH UPDATED VALUE IN FUNCTION
+utilitiesnum = tk.Label(actionBar, text="5", font=("Cambria", 12),  bg="#d6cfb7", justify="left")
+utilitiesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.9)
 
 situationFrame = tk.Frame(actionBar, bg="#f3efe1")
 situationFrame.place(relwidth= 0.9, relheight= 0.5, relx = 0.05, rely = 0.15)
