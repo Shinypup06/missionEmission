@@ -85,8 +85,10 @@ def selectFChar(entry):
     charSelectFrame.lower()
 
 usedSituations = []
+outcomestats = (0, 0, 0)
 
 def executeSituation(num):
+    global outcomestats
     randnum = random.randint(0, 27)
     while True:
         if randnum in usedSituations:
@@ -100,14 +102,6 @@ def executeSituation(num):
     if(num == 2):
         outcomestats = Situations.outcome2s[randnum][1:3]
 
-def calcDeltas(stats):
-    global deltaCO2
-    global deltaMoney
-    global deltaHappiness
-
-    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + stats[1]
-    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + stats[0]
-    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + stats[2] - 0.001, 3)
 
 #TODO: write this
 def endturn():
@@ -115,14 +109,22 @@ def endturn():
     global money
     global carbon
     global happiness
+    
+    global deltaCO2
+    global deltaMoney
+    global deltaHappiness
 
-    #TODO: CALCDELTAS NEEDS STATS
-    # calcDeltas()
-    # year += 1
-    # money += deltaMoney
-    # carbon += deltaCO2
-    # happiness += deltaHappiness
+    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5 + outcomestats[1]
+    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10 + outcomestats[0]
+    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 + outcomestats[2] - 0.001, 3)
+
+    year += 1
+    money += deltaMoney
+    carbon += deltaCO2
+    happiness += deltaHappiness
     updateResourceLabels()
+
+
     situationFrame.lift()    
 
 
