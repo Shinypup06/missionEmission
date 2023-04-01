@@ -1,4 +1,3 @@
-import variables
 import Situations
 import random
 
@@ -30,7 +29,6 @@ treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
 
-objectiveCO2 = 380
 finalobj = 270
 
 global deltaCO2
@@ -41,16 +39,29 @@ deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
 deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
 deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
 
-firstYearPassed = False
-
 usedSituations = []
 
+
+
+def updatePassiveLabels():
+    
+
+def updateResourceLabels():
+    approvalBarValue["relwidth"] = 0.594 * happiness
+    approval["text"] = f"{round(happiness*100, 3)}%"
+    moneyBarValue["relwidth"] = 0.594 * (money/100) * 0.5
+    if (money/100)*0.5 > 1:
+        moneyBarValue["relwidth"] = 0.594
+    money["text"] = f"{money}"
+    carbonBarValue["relwidth"] = 0.594 * (carbon/412) * 0.75
+    carbon["text"] = f"{carbon}"
+
 def endTurn():
-    firstYearPassed = True
     year += 1
     money += deltaMoney
     carbon += deltaCO2
     happiness += deltaHappiness
+    updateResourceLabels()
 
 def addTrees():
     treeNumber += 1
@@ -69,16 +80,17 @@ def addFactory():
 
 def subtractFactory():
     factoryNumber -= 1
-    calcDeltas()
-
-def calcDeltas():
-    deltaCO2 = utilityUsage*3 + factoryNumber*6 - treeNumber*5
-    deltaMoney = utilityUsage*5 + factoryNumber*10 - treeNumber*10
-    deltaHappiness = round(utilityUsage*0.005 + treeNumber*0.001 - factoryNumber*0.002 - 0.001, 3)
 
 def executeSituation():
     stats = Situations.createSituation(situationNumber)
     
+
+
+
+
+
+
+
 
 while True:
     if random.randint(0, 1) == 1:
@@ -96,7 +108,7 @@ while True:
     option = input(
         f"""
         Money: ${money}\tCO2 Levels: {carbon} ppm\tApproval Rating: {happiness*100}%
-        Welcome to Home. The year is Year {year}, Month {months*6+1}. 
+        Welcome to Home. The year is Year {year}. 
         Projected change in CO2: {deltaCO2}
         Projected change in money: {deltaMoney}
         Projected change in approval: {round(deltaHappiness*100, 3)}%
