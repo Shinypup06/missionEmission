@@ -118,10 +118,10 @@ def checkWinLoss():
         reason["text"] = "You went bankrupt and your department has been disbanded."
         loseFrame.lift()
     elif carbon > 549:
-        reason["text"] = "You went above the carbon emissions limit and you have been fired for failing to prevent carbon emission rates from skyrocketing."
+        reason["text"] = "You went above the carbon emissions limit and you have \nbeen fired for failing to prevent carbon emission rates from skyrocketing."
         loseFrame.lift()
     elif happiness < 0.2:
-        reason["text"] = "You were too unpopular and you have been fired due to popular discontent. Better luck next time!"
+        reason["text"] = "You were too unpopular and you have been fired \ndue to popular discontent. Better luck next time!"
         loseFrame.lift()
     elif year == 2050 and carbon > 270:
         reason["text"] = "You were unable to reach the 2050 carbon emission target, despite your impressive money and approval management skills."
@@ -148,7 +148,7 @@ def endturn():
     
 
     deltaCO2 = round(utilityUsage*3 + factoryNumber*6 - treeNumber*6 + outcomestats[1], 3)
-    deltaMoney = round(utilityUsage*5 + factoryNumber*10 - treeNumber*8.5 + outcomestats[0], 3)
+    deltaMoney = round(utilityUsage*5 + factoryNumber*10 - treeNumber*9 + outcomestats[0], 3)
     deltaHappiness = round(utilityUsage*0.003 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3)
 
 
