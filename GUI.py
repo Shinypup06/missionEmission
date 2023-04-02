@@ -2,6 +2,8 @@ import tkinter as tk
 from PIL import ImageTk, Image
 import random
 import Situations
+import os
+import sys
 
 HEIGHT = 700
 WIDTH = 1200
@@ -16,6 +18,14 @@ year = 2023
 treeNumber = 6
 utilityUsage = 5
 factoryNumber = 4
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(
+        sys,
+        '_MEIPASS',
+        os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 def updateResourceLabels():
     approvalBarValue.place(relx=0.203, rely = 0.206, relheight= 0.088, relwidth=0.594 * happiness)
@@ -174,11 +184,11 @@ root = tk.Tk()
 
 
 #images
-mchar = tk.PhotoImage(file="mChar.png")
-fchar = tk.PhotoImage(file="fChar.png")
-nochar = tk.PhotoImage(file="nochar.png")
-smallmchar = ImageTk.PhotoImage(Image.open("mChar.png").resize((175, 175), Image.ANTIALIAS))
-smallfchar = ImageTk.PhotoImage(Image.open("fChar.png").resize((175, 175), Image.ANTIALIAS))
+mchar = tk.PhotoImage(file=resource_path("mChar.png"))
+fchar = tk.PhotoImage(file=resource_path("fChar.png"))
+nochar = tk.PhotoImage(file=resource_path("nochar.png"))
+smallmchar = ImageTk.PhotoImage(Image.open(resource_path("mChar.png")).resize((175, 175), Image.ANTIALIAS))
+smallfchar = ImageTk.PhotoImage(Image.open(resource_path("fChar.png")).resize((175, 175), Image.ANTIALIAS))
 
 #this is just here to reserve the space on the gui
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
