@@ -1,1 +1,0 @@
-# ridgeHacks2023
