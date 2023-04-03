@@ -342,7 +342,7 @@ def playAgain():
     yearDisplay["text"]=str(year)
     nameDisplay["text"]=" "
     nameMsg["text"]=" "
-    nameEntry.place(relx = 0.3, rely=0.25, relheight=0.1, relwidth=0.5)
+    nameEntry.delete(0, 'end')
 
     updateResourceLabels()
     disableButtons()
