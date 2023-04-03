@@ -15,4 +15,4 @@ We hard coded various scenarios and situations as well as options into a separat
 The inspiration behind this project was our previous experiences with text-based games where you are in control of a larger institution and our passion for educating the youth. But we also wanted to add some flair so we use a GUI instead of terminal based.
 
 Thank you for reading, and we hope you enjoy our game!
-- Shiny, Kesh and Alan
+Shiny, Kesh and Alan
