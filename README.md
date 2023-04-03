@@ -1,4 +1,4 @@
-# missionEmission
+# Mission: Emission
 
 Welcome to Mission: Emission, a game that we made to simulate the difficulties of managing carbon emissions while balancing a budget and public approval.
 
