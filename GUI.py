@@ -53,8 +53,6 @@ def updateResourceLabels():
     carbonValue["text"] = f"{round(carbon,1)}"
     currentCO2["text"] = f"{round(carbon,1)} ppm"
 
-
-
 def addTrees():
     global treeNumber
     if(treeNumber < 10):
@@ -62,8 +60,6 @@ def addTrees():
     else:
         errorMessage["text"]= "Your city does not have\nenough space for more trees!"
     treesnum["text"]= str(treeNumber * 10)
-
-#TODO: ADD ERROR MESSAGE IF TREENUMBER HITS LIMIT
 
 def subtractTrees():
     global treeNumber
@@ -352,10 +348,7 @@ def playAgain():
     tutorialFrame.lift() 
     charSelectFrame.lift()
 
-
-
 root = tk.Tk()
-
 
 #images
 mchar = tk.PhotoImage(file=resource_path("images/mChar.png"))
@@ -430,10 +423,6 @@ situation2 = tk.Button(situationFrame, text= "2", background="#f3efe1", font=("C
 
 situation1.place(relwidth=0.3, relheight=0.1, relx = 0.15, rely = 0.7)
 situation2.place(relwidth=0.3, relheight=0.1, relx = 0.55, rely = 0.7)
-
-
-
-
 
 mainFrame = tk.Frame(root, bg="white")
 mainFrame.place(relheight = 1, relwidth=1, relx=0, rely=0)
