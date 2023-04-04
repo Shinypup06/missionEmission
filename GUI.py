@@ -158,8 +158,13 @@ def closeTutorial():
     else:
         tutorialOK["text"]="NEXT"
         tutorialText["text"]="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm, the pre-industrial level. \nCurrently, it is at 412ppm. \n\n Each action will affect your approval, economy or carbon footprint. \n\n If your approval rating goes below 20%, you will be fired. \n\n If your money runs below 0, your city goes bankrupt. \n\n To win, fulfill all CO2 objectives while managing money and approval until 2050."
+        tutorialStep = 1
         enableButtons()
         tutorialFrame.lower()
+
+def openTutorial():
+    tutorialFrame.lift() 
+    disableButtons()
 
 def selectMChar(entry):
     global name
@@ -207,6 +212,8 @@ def enableButtons():
     subtractFactories["state"]="normal"
     addUtilities["state"]="normal"
     subtractUtilities["state"]="normal"
+    restartButton["state"]="normal"
+    showTutorial["state"]="normal"
 
 def disableButtons():
     endTurnButton["state"]="disabled"
@@ -217,6 +224,8 @@ def disableButtons():
     subtractFactories["state"]="disabled"
     addUtilities["state"]="disabled"
     subtractUtilities["state"]="disabled"
+    restartButton["state"]="disabled"
+    showTutorial["state"]="disabled"
 
 def executeSituation(num):
     global outcomestats
@@ -442,6 +451,13 @@ endTurnButton.place(relx=0.7, rely=0.4, relheight=0.2, relwidth=0.2)
 projectionsButton = tk.Button(charFrame, text= "Get \nProjections", background="#f3efe1", font=("Cambria",16), activebackground="#fdfaf1", state="disabled", command=getProjections)
 projectionsButton.place(relx=0.1, rely=0.4, relheight=0.2, relwidth=0.2)
 
+restartButton = tk.Button(charFrame, text= "↻", background="white", font=("Cambria",16), activebackground="#fdfaf1", state="disabled", command=playAgain)
+restartButton.place(relx=0.92, rely=0.03, relheight=0.1, relwidth=0.05)
+
+showTutorial = tk.Button(charFrame, text= "?", background="white", font=("Cambria",16), activebackground="#fdfaf1", state="disabled", command=lambda: openTutorial())
+showTutorial.place(relx=0.86, rely=0.03, relheight=0.1, relwidth=0.05)
+
+
 #statistics - bottom right
 statsFrame = tk.Frame(mainFrame, bg="#f8f6f2")
 statsFrame.place(relheight=0.45, relwidth=0.7, relx = 0.3, rely=0.55)
@@ -580,8 +596,6 @@ fCharButton.place(relx=0.55, rely= 0.4, relheight= 0.45, relwidth= 0.25)
 
 nameMsg = tk.Label(charSelectFrame, text=" ", font = ("Cambria", 12), bg="white")
 nameMsg.place(relx=0.1, rely=0.9, relheight=0.05, relwidth=0.8)
-
-
 
 root.title("Mission: Emission")
 root.mainloop()
