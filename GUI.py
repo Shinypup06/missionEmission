@@ -110,9 +110,9 @@ def getProjections():
 
     if(usedPredictions < allottedPredictions):
 
-        if(round(utilityUsage*0.003 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3) > 0):
+        if(round(utilityUsage*0.004 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3) > 0):
             approvalPrediction["text"]="Projected Change in Approval: +"
-        elif (round(utilityUsage*0.003 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3) < 0):
+        elif (round(utilityUsage*0.004 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3) < 0):
             approvalPrediction["text"]="Projected Change in Approval: -"
         else:
             approvalPrediction["text"]="Projected Change in Approval: 0"
@@ -124,7 +124,7 @@ def getProjections():
         else:
             budgetPrediction["text"]="Projected Change in Budget: 0"
 
-        if(round(utilityUsage*3 + factoryNumber*6 - treeNumber*6 + outcomestats[1], 3) > 0):
+        if(round(utilityUsage*3 + factoryNumber*6 - treeNumber*6.5 + outcomestats[1], 3) > 0):
             co2Prediction["text"]="Projected Change in Carbon Levels: +"
         elif (round(utilityUsage*3 + factoryNumber*6 - treeNumber*6 + outcomestats[1], 3) < 0):
             co2Prediction["text"]="Projected Change in Carbon Levels: -"
@@ -269,9 +269,9 @@ def endturn():
 
     errorMessage["text"]= " "
 
-    deltaCO2 = round(utilityUsage*3 + factoryNumber*6 - treeNumber*6 + outcomestats[1], 3)
+    deltaCO2 = round(utilityUsage*3 + factoryNumber*6 - treeNumber*6.5 + outcomestats[1], 3)
     deltaMoney = round(utilityUsage*5 + factoryNumber*10 - treeNumber*9 + outcomestats[0], 3)
-    deltaHappiness = round(utilityUsage*0.003 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3)
+    deltaHappiness = round(utilityUsage*0.004 - factoryNumber*0.011 + outcomestats[2] - 0.001, 3)
 
 
 
