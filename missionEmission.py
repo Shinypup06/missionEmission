@@ -1,12 +1,20 @@
 import tkinter as tk
+import customtkinter
 from PIL import ImageTk, Image
 import random
 import Situations
 import os
 import sys
 
-HEIGHT = 700
-WIDTH = 1200
+HEIGHT = 1000
+WIDTH = 1800
+
+#COLORS
+statsFrameColor = "#f8f6f2"
+actionBarColor = "#d6cfb7"
+statBarColor = "#e5e0d2"
+statBarOutlineColor = "#a69d80"
+
 
 name = " "
 money = 100
@@ -357,14 +365,14 @@ def playAgain():
     tutorialFrame.lift() 
     charSelectFrame.lift()
 
-root = tk.Tk()
+root = customtkinter.CTk()
 
 #images
 mchar = tk.PhotoImage(file=resource_path("images/mChar.png"))
 fchar = tk.PhotoImage(file=resource_path("images/fChar.png"))
 nochar = tk.PhotoImage(file=resource_path("images/nochar.png"))
-smallmchar = ImageTk.PhotoImage(Image.open(resource_path("images/mChar.png")).resize((175, 175), Image.ANTIALIAS))
-smallfchar = ImageTk.PhotoImage(Image.open(resource_path("images/fChar.png")).resize((175, 175), Image.ANTIALIAS))
+smallmchar = ImageTk.PhotoImage(Image.open(resource_path("images/mChar.png")).resize((300, 300), Image.ANTIALIAS))
+smallfchar = ImageTk.PhotoImage(Image.open(resource_path("images/fChar.png")).resize((300, 300), Image.ANTIALIAS))
 
 #this is just here to reserve the space on the gui
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
@@ -576,7 +584,7 @@ tutorialOK=tk.Button(tutorialFrame, text= "NEXT", background="#f3efe1", font=("C
 tutorialOK.place(relx=0.3, rely=0.8, relheight=0.15, relwidth=0.4)
 
 #character select
-charSelectFrame =tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+charSelectFrame =customtkinter.CTkFrame(root, border_width=2, corner_radius=20, background_corner_colors=["#d6cfb7", "white", "white", "#d6cfb7"], fg_color="white", border_color="black")
 charSelectFrame.place(relx = 0.15, rely = 0.15, relheight=0.7, relwidth=0.7)
 
 charSelectTitle = tk.Label(charSelectFrame, font = ("Cambria", 16, "bold"), text= "Select Character", bg="white")
@@ -585,7 +593,7 @@ charSelectTitle.place(relx = 0.1, rely=0.1, relheight=0.1, relwidth=0.8)
 nameQ = tk.Label(charSelectFrame, text="Name: ", font = ("Cambria", 16, "bold"), bg="white")
 nameQ.place(relx=0.1, rely=0.25, relheight=0.1, relwidth=0.2)
 
-nameEntry = tk.Entry(charSelectFrame, font= ("Cambria",16))
+nameEntry = customtkinter.CTkEntry(charSelectFrame, placeholder_text="What is your name?", font= ("Cambria",16), fg_color="white")
 nameEntry.place(relx = 0.3, rely=0.25, relheight=0.1, relwidth=0.5)
 
 mCharButton = tk.Button(charSelectFrame, image=smallmchar, command=lambda: selectMChar(nameEntry.get()), bg="white")
