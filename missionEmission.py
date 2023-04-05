@@ -6,7 +6,7 @@ import Situations
 import os
 import sys
 
-HEIGHT = 1000
+HEIGHT = 1100
 WIDTH = 1800
 
 #COLORS
@@ -160,7 +160,6 @@ def closeTutorial():
     global tutorialStep
     global tutorialButton
     if(tutorialStep == 1):
-
         tutorialButton.set("Okay, let's play!")
         tutorialText["text"]="Use the + and - buttons on the bottom right to control the number of \ntrees, factories and utility facilities in your city. \n\nEach has its ups and downs: \nPlanting trees costs money, but reduces carbon. \nFactories make money, but produce carbon and cause popular discontent.\n Utilities will make people happy and generate some income but also produce carbon. \n\nYou will also have to deal with random situations that pop up at times. \n\nAre you ready to save the planet?"
         tutorialStep += 1
@@ -267,6 +266,10 @@ def checkWinLoss():
         successMsg["text"] = "Congrats, You were able to reach the 2050 carbon emission target!"
         disableButtons()
         winFrame.lift()
+    elif carbon < 270 and year < 2050:
+        winFrame.lift()
+        successMsg["text"] = "Congrats, You were able to reach the carbon emission target before 2050!"
+        disableButtons()
 
 def endturn():
     
@@ -382,64 +385,64 @@ canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
 #projected changes
-projectionFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+projectionFrame = customtkinter.CTkFrame(root, border_width=2, corner_radius=20, background_corner_colors=[actionBarColor, "white", statsFrameColor, actionBarColor], fg_color="white", border_color="black")
 projectionFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
 projectionTitle = tk.Label(projectionFrame, font = ("Tempus Sans ITC", 36, "bold"), text= "Predicted Changes for Next Year", bg="white")
 projectionTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
-approvalPrediction = tk.Label(projectionFrame, font = ("Garamond", 14), text= "Projected Approval: ", bg="white")
+approvalPrediction = tk.Label(projectionFrame, font = ("Tempus Sans ITC", 20), text= "Projected Approval: ", bg="white")
 approvalPrediction.place(relx=0.1, rely=0.25, relheight=0.15, relwidth=0.8)
 
-budgetPrediction = tk.Label(projectionFrame, font = ("Garamond", 14), text= "Projected Money: ", bg="white")
+budgetPrediction = tk.Label(projectionFrame, font = ("Tempus Sans ITC", 20), text= "Projected Money: ", bg="white")
 budgetPrediction.place(relx=0.1, rely=0.4, relheight=0.15, relwidth=0.8)
 
-co2Prediction = tk.Label(projectionFrame, font = ("Garamond", 14), text= "Projected Carbon Levels: ", bg="white")
+co2Prediction = tk.Label(projectionFrame, font = ("Tempus Sans ITC", 20), text= "Projected Carbon Levels: ", bg="white")
 co2Prediction.place(relx=0.1, rely=0.55, relheight=0.15, relwidth=0.8)
 
-projectionOK = tk.Button(projectionFrame, text= "OK", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", command=lambda: closeProjections())
-projectionOK.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
+projectionOK = customtkinter.CTkButton(projectionFrame, text= "OK", fg_color=buttonColor, font=("Tempus Sans ITC",16), text_color="black", hover_color=actionBarColor, border_color=actionBarColor, border_width=2, command=lambda: closeProjections())
+projectionOK.place(relwidth=0.4, relheight=0.1, relx = 0.3, rely = 0.75)
 
 #Lose case
-loseFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+loseFrame = customtkinter.CTkFrame(root, border_width=2, corner_radius=20, background_corner_colors=[actionBarColor, "white", statsFrameColor, actionBarColor], fg_color="white", border_color="black")
 loseFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
 loseTitle = tk.Label(loseFrame, font = ("Tempus Sans ITC", 36, "bold"), text= "You Lost!", bg="white")
 loseTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
-reason = tk.Label(loseFrame, font= ("Garamond", 12), bg="white", text="temp")
+reason = tk.Label(loseFrame, font= ("Tempus Sans ITC", 20), bg="white", text="temp")
 reason.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
-loseButton = tk.Button(loseFrame, text= "Play Again", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", command = lambda: playAgain())
-loseButton.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
+loseButton = customtkinter.CTkButton(loseFrame, text= "Try Again", fg_color=buttonColor, text_color="black", font=("Tempus Sans ITC",16), hover_color=actionBarColor, border_color=actionBarColor, border_width=2, command=lambda: playAgain())
+loseButton.place(relwidth=0.4, relheight=0.15, relx = 0.3, rely = 0.75)
 
 #Win case
-winFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+winFrame = customtkinter.CTkFrame(root, border_width=2, corner_radius=20, background_corner_colors=[actionBarColor, "white", statsFrameColor, actionBarColor], fg_color="white", border_color="black")
 winFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
 winTitle = tk.Label(winFrame, font = ("Tempus Sans ITC", 36, "bold"), text= "You won!", bg="white")
 winTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
-successMsg = tk.Label(winFrame, font= ("Garamond", 12), bg="white", text="temp")
+successMsg = tk.Label(winFrame, font= ("Tempus Sans ITC", 20), bg="white", text="temp")
 successMsg.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
-winButton = tk.Button(winFrame, text= "Play Again", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", command= lambda: playAgain())
-winButton.place(relwidth=0.4, relheight=0.2, relx = 0.3, rely = 0.7)
+winButton = customtkinter.CTkButton(winFrame, text= "Play Again", fg_color=buttonColor, font=("Tempus Sans ITC",16), text_color="black", hover_color=actionBarColor, border_color=actionBarColor, border_width=2, command=lambda: playAgain())
+winButton.place(relwidth=0.4, relheight=0.15, relx = 0.3, rely = 0.75)
 
 
 #The frame with the situation in it that pops up and disappears when you resolve it
-situationFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+situationFrame = customtkinter.CTkFrame(root, border_width=2, corner_radius=20, background_corner_colors=[actionBarColor, "white", statsFrameColor, actionBarColor], fg_color="white", border_color="black")
 situationFrame.place(relx = 0.2, rely = 0.2, relheight=0.6, relwidth=0.6)
 
 situationTitle = tk.Label(situationFrame, font = ("Tempus Sans ITC", 36, "bold"), text= "Important Message!", bg="white")
 situationTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
 
-situationText = tk.Label(situationFrame, font= ("Garamond", 12), bg="white", text="temp")
+situationText = tk.Label(situationFrame, font= ("Tempus Sans ITC", 20), bg="white", text="temp")
 situationText.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
 
-situation1 = tk.Button(situationFrame, text= "1", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", command= lambda: executeSituation(1))
-situation2 = tk.Button(situationFrame, text= "2", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", command= lambda: executeSituation(2))
+situation1 = customtkinter.CTkButton(situationFrame, text= "1", fg_color=buttonColor, font=("Tempus Sans ITC",16), text_color="black", hover_color=actionBarColor, border_color=actionBarColor, border_width=2, command= lambda: executeSituation(1))
+situation2 = customtkinter.CTkButton(situationFrame, text= "2", fg_color=buttonColor, font=("Tempus Sans ITC",16), text_color="black", hover_color=actionBarColor, border_color=actionBarColor, border_width=2, command= lambda: executeSituation(2))
 
 situation1.place(relwidth=0.3, relheight=0.1, relx = 0.15, rely = 0.7)
 situation2.place(relwidth=0.3, relheight=0.1, relx = 0.55, rely = 0.7)
@@ -456,16 +459,16 @@ character.place(relx = 0.2, rely=0.15, relwidth=0.6, relheight=0.8)
 nameDisplay = tk.Label(charFrame, text= " ", font=("Tempus Sans ITC", 36, "bold"), bg="white")
 nameDisplay.place(relx = 0.09, rely=0.1, relheight=0.1, relwidth=0.8 ) 
 
-endTurnButton = tk.Button(charFrame, text= "End Turn", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=endturn)
+endTurnButton = tk.Button(charFrame, text= "End Turn", background=buttonColor, font=("Tempus Sans ITC",26), activebackground="#fdfaf1", state="disabled", relief="ridge", borderwidth=4, command=endturn)
 endTurnButton.place(relx=0.7, rely=0.4, relheight=0.2, relwidth=0.2)
 
-projectionsButton = tk.Button(charFrame, text= "Get \nProjections", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=getProjections)
+projectionsButton = tk.Button(charFrame, text= "Get \nProjections", background=buttonColor, font=("Tempus Sans ITC",26), activebackground="#fdfaf1", state="disabled", relief="groove", borderwidth=4, command=getProjections)
 projectionsButton.place(relx=0.1, rely=0.4, relheight=0.2, relwidth=0.2)
 
-restartButton = tk.Button(charFrame, text= "↻", background="white", font=("Garamond",16), state="disabled", command=playAgain)
+restartButton = tk.Button(charFrame, text= "↻", background="white", font=("Tempus Sans ITC",28, "bold"), state="disabled", relief="flat", command=playAgain)
 restartButton.place(relx=0.92, rely=0.03, relheight=0.1, relwidth=0.05)
 
-showTutorial = tk.Button(charFrame, text= "?", background="white", font=("Garamond",16), state="disabled", command=lambda: openTutorial())
+showTutorial = tk.Button(charFrame, text= "?", background="white", font=("Cambria",28, "bold"), state="disabled", relief="flat", command=lambda: openTutorial())
 showTutorial.place(relx=0.86, rely=0.03, relheight=0.1, relwidth=0.05)
 
 
@@ -479,33 +482,33 @@ approvalBar.place(relx=0.2, rely = 0.2, relheight= 0.1, relwidth=0.6)
 
 approvalBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 approvalBarValue.place(relx=0.203, rely = 0.206, relheight= 0.088, relwidth=0.594 * 0.6)
-approvalLabel = tk.Label(statsFrame, text="Approval (%): ", font=("Garamond", 12),  bg=statsFrameColor, justify="left")
+approvalLabel = tk.Label(statsFrame, text="Approval (%): ", font=("Tempus Sans ITC", 20),  bg=statsFrameColor, justify="left")
 approvalLabel.place(relx=0.06, rely=0.206, relheight=0.088, relwidth=0.14)
 
 
-approvalValue = tk.Label(statsFrame, text="60", font=("Garamond", 12),  bg=statsFrameColor, justify="left")
-approvalValue.place(relx=0.8, rely=0.206, relheight=0.088, relwidth=0.05)
+approvalValue = tk.Label(statsFrame, text="60", font=("Tempus Sans ITC", 20),  bg=statsFrameColor, justify="left")
+approvalValue.place(relx=0.81, rely=0.206, relheight=0.088, relwidth=0.08)
 
 
 moneyBar = tk.Frame(statsFrame, bg="white", highlightbackground=statBarOutlineColor, highlightthickness=2)
 moneyBar.place(relx=0.2, rely = 0.45, relheight= 0.1, relwidth=0.6)
 moneyBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 moneyBarValue.place(relx=0.203, rely = 0.456, relheight= 0.088, relwidth=0.594 * 0.5)
-moneyLabel = tk.Label(statsFrame, text="Budget ($k): ", font=("Garamond", 12),  bg=statsFrameColor, justify="left")
+moneyLabel = tk.Label(statsFrame, text="Budget ($k): ", font=("Tempus Sans ITC", 20),  bg=statsFrameColor, justify="left")
 moneyLabel.place(relx=0.06, rely = 0.456, relheight= 0.088, relwidth=0.14)
 
-moneyValue = tk.Label(statsFrame, text="100", font=("Garamond", 12),  bg=statsFrameColor, justify="left")
-moneyValue.place(relx=0.8, rely=0.456, relheight=0.088, relwidth=0.05)
+moneyValue = tk.Label(statsFrame, text="100", font=("Tempus Sans ITC", 20),  bg=statsFrameColor, justify="left")
+moneyValue.place(relx=0.81, rely=0.456, relheight=0.088, relwidth=0.08)
 
 carbonBar = tk.Frame(statsFrame, bg="white", highlightbackground=statBarOutlineColor, highlightthickness=2)
 carbonBar.place(relx=0.2, rely = 0.7, relheight= 0.1, relwidth=0.6)
 carbonBarValue = tk.Frame(statsFrame, bg="#e5e0d2")
 carbonBarValue.place(relx=0.203, rely = 0.706, relheight= 0.088, relwidth=0.594 * 0.75)
-carbonLabel = tk.Label(statsFrame, text="Carbon (ppm): ", font=("Garamond", 12),  bg=statsFrameColor, justify="left")
+carbonLabel = tk.Label(statsFrame, text="Carbon (ppm): ", font=("Tempus Sans ITC", 20),  bg=statsFrameColor, justify="left")
 carbonLabel.place(relx=0.06, rely = 0.706, relheight= 0.088, relwidth=0.14)
 
-carbonValue = tk.Label(statsFrame, text="412", font=("Garamond", 12),  bg=statsFrameColor, justify="left")
-carbonValue.place(relx=0.8, rely=0.706, relheight=0.088, relwidth=0.05)
+carbonValue = tk.Label(statsFrame, text="412", font=("Tempus Sans ITC", 20),  bg=statsFrameColor, justify="left")
+carbonValue.place(relx=0.81, rely=0.706, relheight=0.088, relwidth=0.08)
 
 
 actionBar = tk.Frame(mainFrame, bg=actionBarColor)
@@ -514,74 +517,74 @@ actionBar.place(relheight=1, relwidth=0.3, relx=0, rely=0)
 actionBarTitle = tk.Label(actionBar, text="Your Options", font=("Tempus Sans ITC", 36, "bold"), bg=actionBarColor)
 actionBarTitle.place(relx = 0.05, rely = 0.05, relheight=0.06, relwidth=0.9)
 
-yearlabelDisplay = tk.Label(actionBar, text="Current year:", font=("Garamond", 20), bg=actionBarColor)
+yearlabelDisplay = tk.Label(actionBar, text="Current year:", font=("Tempus Sans ITC", 24), bg=actionBarColor)
 yearlabelDisplay.place(relx = 0.05, rely = 0.15, relheight=0.05, relwidth=0.9)
-yearDisplay = tk.Label(actionBar, text="2023", font=("Garamond", 30, "bold"), bg=actionBarColor)
+yearDisplay = tk.Label(actionBar, text="2023", font=("Tempus Sans ITC", 36, "bold"), bg=actionBarColor)
 yearDisplay.place(relx = 0.05, rely = 0.2, relheight=0.06, relwidth=0.9)
 
-objective = tk.Label(actionBar, text="Your objective: \n reduce carbon levels to \n below 270 ppm by 2050.", font=("Garamond", 14), bg=actionBarColor)
+objective = tk.Label(actionBar, text="Your objective: \n reduce carbon levels to \n below 270 ppm by 2050.", font=("Tempus Sans ITC", 24), bg=actionBarColor)
 objective.place(relx = 0.05, rely = 0.29, relheight=0.1, relwidth=0.9)
 
-currentCO2label = tk.Label(actionBar, text="Current carbon levels:", font=("Garamond", 14), bg=actionBarColor)
+currentCO2label = tk.Label(actionBar, text="Current carbon levels:", font=("Tempus Sans ITC", 20), bg=actionBarColor)
 currentCO2label.place(relx = 0.05, rely = 0.42, relheight=0.1, relwidth=0.9)
 
-currentCO2 = tk.Label(actionBar, text="412 ppm", font=("Garamond", 18, "bold"), bg=actionBarColor)
+currentCO2 = tk.Label(actionBar, text="412 ppm", font=("Tempus Sans ITC", 32, "bold"), bg=actionBarColor)
 currentCO2.place(relx = 0.05, rely = 0.48, relheight=0.08, relwidth=0.9)
 
 
 
 
-addTreesButton = tk.Button(actionBar, text= "+", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=addTrees)
-subtractTreesButton = tk.Button(actionBar, text= "-", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=subtractTrees)
+addTreesButton = tk.Button(actionBar, text= "+", background=buttonColor, font=("Tempus Sans ITC",28, "bold"), activebackground="#fdfaf1", relief="ridge", state="disabled", command=addTrees)
+subtractTreesButton = tk.Button(actionBar, text= "-", background=buttonColor, font=("Tempus Sans ITC",28, "bold"), activebackground="#fdfaf1", relief="ridge", state="disabled", command=subtractTrees)
 addTreesButton.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.7)
 subtractTreesButton.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.7)
 
-treesLabel = tk.Label(actionBar, text="Amount of trees: ", font=("Garamond", 11),  bg=actionBarColor, justify="left")
+treesLabel = tk.Label(actionBar, text="# of trees: ", font=("Tempus Sans ITC", 20),  bg=actionBarColor, justify="left")
 treesLabel.place(relwidth=0.35, relheight=0.05, relx = 0.28, rely = 0.7)
 
 
-treesnum = tk.Label(actionBar, text="60", font=("Garamond", 12),  bg=actionBarColor, justify="left")
+treesnum = tk.Label(actionBar, text="60", font=("Tempus Sans ITC", 20, "bold"),  bg=actionBarColor, justify="left")
 treesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.7)
 
 
-addFactories = tk.Button(actionBar, text= "+", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=addFactory)
-subtractFactories = tk.Button(actionBar, text= "-", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=subtractFactory)
+addFactories = tk.Button(actionBar, text= "+", background=buttonColor, font=("Tempus Sans ITC",28, "bold"), activebackground="#fdfaf1", relief="ridge", state="disabled", command=addFactory)
+subtractFactories = tk.Button(actionBar, text= "-", background=buttonColor, font=("Tempus Sans ITC",28, "bold"), activebackground="#fdfaf1", relief="ridge", state="disabled", command=subtractFactory)
 addFactories.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.8)
 subtractFactories.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.8)
 
-factoriesLabel = tk.Label(actionBar, text="Amount of Factories: ", font=("Garamond", 11),  bg=actionBarColor, justify="left")
+factoriesLabel = tk.Label(actionBar, text="# of Factories: ", font=("Tempus Sans ITC", 20),  bg=actionBarColor, justify="left")
 factoriesLabel.place(relwidth=0.36, relheight=0.05, relx = 0.27, rely = 0.8)
 
 
-factoriesnum = tk.Label(actionBar, text="4", font=("Garamond", 12),  bg=actionBarColor, justify="left")
+factoriesnum = tk.Label(actionBar, text="4", font=("Tempus Sans ITC", 20, "bold"),  bg=actionBarColor, justify="left")
 factoriesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.8)
 
 
-addUtilities = tk.Button(actionBar, text= "+", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=addUtility)
-subtractUtilities = tk.Button(actionBar, text= "-", background=buttonColor, font=("Garamond",16), activebackground="#fdfaf1", state="disabled", command=subtractUtility)
+addUtilities = tk.Button(actionBar, text= "+", background=buttonColor, font=("Tempus Sans ITC",28, "bold"), activebackground="#fdfaf1", relief="ridge", state="disabled", command=addUtility)
+subtractUtilities = tk.Button(actionBar, text= "-", background=buttonColor, font=("Tempus Sans ITC",28, "bold"), activebackground="#fdfaf1", relief="ridge", state="disabled", command=subtractUtility)
 addUtilities.place(relwidth=0.15, relheight=0.05, relx = 0.05, rely = 0.9)
 subtractUtilities.place(relwidth=0.15, relheight=0.05, relx = 0.8, rely = 0.9)
 
-utilitiesLabel = tk.Label(actionBar, text="Amount of Utilities: ", font=("Garamond", 11),  bg=actionBarColor, justify="left")
+utilitiesLabel = tk.Label(actionBar, text="# of Utilities: ", font=("Tempus Sans ITC", 20),  bg=actionBarColor, justify="left")
 utilitiesLabel.place(relwidth=0.36, relheight=0.05, relx = 0.27, rely = 0.9)
 
 
-utilitiesnum = tk.Label(actionBar, text="5", font=("Garamond", 12),  bg=actionBarColor, justify="left")
+utilitiesnum = tk.Label(actionBar, text="5", font=("Tempus Sans ITC", 20, "bold"),  bg=actionBarColor, justify="left")
 utilitiesnum.place(relwidth=0.1, relheight=0.05, relx = 0.64, rely = 0.9)
 
-errorMessage = tk.Label(actionBar, text=" ", font=("Garamond", 12, "italic"),  bg=actionBarColor)
+errorMessage = tk.Label(actionBar, text=" ", font=("Tempus Sans ITC", 12, "italic"),  bg=actionBarColor)
 errorMessage.place(rely=0.6, relheight=0.08, relx=0.05, relwidth=0.9)
 
 #tutorial stuff
 
-tutorialFrame = tk.Frame(root, bg="white", bd=2, highlightbackground="#6b644e", highlightthickness=2)
+tutorialFrame = customtkinter.CTkFrame(root, border_width=2, corner_radius=20, background_corner_colors=[actionBarColor, "white", statsFrameColor, actionBarColor], fg_color="white", border_color="black")
 tutorialFrame.place(relx = 0.15, rely = 0.15, relheight=0.7, relwidth=0.7)
 
 tutorialTitle = tk.Label(tutorialFrame, font = ("Tempus Sans ITC", 36, "bold"), text= "Welcome to Mission: Emission!", bg="white")
 tutorialTitle.place(relx = 0.1, rely=0.15, relheight=0.1, relwidth=0.8)
 
-tutorialText = tk.Label(tutorialFrame, font= ("Garamond", 12), bg="white", text="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm, the pre-industrial level. \nCurrently, it is at 412ppm. \n\n Each action will affect your approval, economy or carbon footprint. \n\n If your approval rating goes below 20%, you will be fired. \n\n If your money runs below 0, your city goes bankrupt. \n\n To win, fulfill all CO2 objectives while managing money and approval until 2050.")
-tutorialText.place(relx=0.1, rely=0.25, relheight=0.45, relwidth=0.8)
+tutorialText = tk.Label(tutorialFrame, font= ("Tempus Sans ITC", 18), bg="white", text="You have been elected as Mayor of Hackerstown! \n The goal of the game is to reduce CO2 emissions to 270ppm, the pre-industrial level. \nCurrently, it is at 412ppm. \n\n Each action will affect your approval, economy or carbon footprint. \n\n If your approval rating goes below 20%, you will be fired. \n\n If your money runs below 0, your city goes bankrupt. \n\n To win, fulfill all CO2 objectives while managing money and approval until 2050.")
+tutorialText.place(relx=0.1, rely=0.28, relheight=0.45, relwidth=0.8)
 
 tutorialOK=customtkinter.CTkButton(tutorialFrame, textvariable=tutorialButton, text_color="black", corner_radius=20, border_color=actionBarColor, border_width=2, fg_color=buttonColor, hover_color=actionBarColor, font=("Tempus Sans ITC",20, "bold"), command=closeTutorial)
 tutorialOK.place(relx=0.3, rely=0.8, relheight=0.15, relwidth=0.4)
@@ -593,7 +596,7 @@ charSelectFrame.place(relx = 0.15, rely = 0.15, relheight=0.7, relwidth=0.7)
 charSelectTitle = tk.Label(charSelectFrame, font = ("Tempus Sans ITC", 36, "bold"), text= "Select Character", bg="white")
 charSelectTitle.place(relx = 0.1, rely=0.1, relheight=0.1, relwidth=0.8)
 
-nameQ = tk.Label(charSelectFrame, text="Name: ", font = ("Garamond", 22), bg="white")
+nameQ = tk.Label(charSelectFrame, text="Name: ", font = ("Tempus Sans ITC", 22), bg="white")
 nameQ.place(relx=0.2, rely=0.25, relheight=0.1, relwidth=0.1)
 
 nameEntry = customtkinter.CTkEntry(charSelectFrame, placeholder_text="What is your name?", font= ("Tempus Sans ITC",20, "bold"), fg_color="white", border_color="#979da2")
@@ -606,7 +609,7 @@ fCharButton = customtkinter.CTkButton(charSelectFrame, image=smallfchar, text=" 
 fCharButton.place(relx=0.55, rely= 0.4, relheight= 0.45, relwidth= 0.25)
 
 
-nameMsg = tk.Label(charSelectFrame, text=" ", font = ("Garamond", 12), bg="white")
+nameMsg = tk.Label(charSelectFrame, text=" ", font = ("Tempus Sans ITC", 12), bg="white")
 nameMsg.place(relx=0.1, rely=0.9, relheight=0.05, relwidth=0.8)
 
 root.title("Mission: Emission")
